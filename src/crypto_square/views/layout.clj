@@ -13,13 +13,18 @@
     [:h1 "Crypto Square"] 
     [:body body]))
 
+
 (defn input-form [] 
-	(form-to [:post "/"] 
-	  (text-area {:rows 6 :cols 40} :plaintext) 
-	  (submit-button "Generate square")))
+  (common 
+  	[:body 
+			(form-to [:post "/"] 
+	  	(text-area {:rows 6 :cols 40} :plaintext) 
+	  	(submit-button "Generate square"))]))
 
 (defn show-square [ciphertext] 
-	(html
-		(label :ciphertext-title "The cyphertext is")
-		(label :ciphertext ciphertext)
-		(link-to "/" "Again?")))
+  (common 
+  	[:body
+			(html
+				(label :ciphertext-title "The cyphertext is")
+				(label :ciphertext ciphertext)
+				(link-to "/" "Again?"))]))

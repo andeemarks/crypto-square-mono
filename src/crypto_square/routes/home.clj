@@ -4,13 +4,11 @@
             [crypto-square.models.core :as model]))
 
 (defn home []
-  (layout/common 
-  	[:body (layout/input-form)]))
+  (layout/input-form))
 
 (defn build-square [request]
 	(let [ciphertext (model/ciphertext (:plaintext (:params request)))]
-	  (layout/common 
-	  	[:body (layout/show-square ciphertext)])))
+	  (layout/show-square ciphertext)))
 
 (defroutes home-routes
   (GET "/"  [] (home))
