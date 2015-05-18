@@ -26,8 +26,8 @@
   (common 
   	[:body
 			(html
-				(label :ciphertext-title "The cyphertext is")
+				[:h3 "The cyphertext is"]
 				"<br>"
 				(label {:id :ciphertext} :ciphertext ciphertext)
 				"<br>"
-				(link-to "/" "Again?"))]))
+				[:h4 (link-to "/" "Again?")])]))

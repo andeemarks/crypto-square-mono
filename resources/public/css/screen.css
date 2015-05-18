@@ -10,5 +10,6 @@ h1 {
 
 label#ciphertext {
   border:1px solid #999999;
+  font-size: 20px;
   font-family:Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
 }
