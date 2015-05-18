@@ -18,13 +18,16 @@
   (common 
   	[:body 
 			(form-to [:post "/"] 
-	  	(text-area {:rows 6 :cols 40} :plaintext) 
-	  	(submit-button "Generate square"))]))
+	  		(text-area {:rows 6 :cols 40} :plaintext) 
+				"<br>"
+	  		(submit-button "Generate square"))]))
 
 (defn show-square [ciphertext] 
   (common 
   	[:body
 			(html
 				(label :ciphertext-title "The cyphertext is")
+				"<br>"
 				(label :ciphertext ciphertext)
+				"<br>"
 				(link-to "/" "Again?"))]))
