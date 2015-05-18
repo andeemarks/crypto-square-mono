@@ -28,6 +28,6 @@
 			(html
 				(label :ciphertext-title "The cyphertext is")
 				"<br>"
-				(label :ciphertext ciphertext)
+				(label {:id :ciphertext} :ciphertext ciphertext)
 				"<br>"
 				(link-to "/" "Again?"))]))
