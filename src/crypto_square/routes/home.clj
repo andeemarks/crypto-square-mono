@@ -6,10 +6,11 @@
 (defn home []
   (layout/input-form))
 
-(defn build-square [request]
-	(let [ciphertext (model/ciphertext (:plaintext (:params request)))]
+(defn build-square [params]
+	(let [plaintext (:plaintext params)
+				ciphertext (model/ciphertext plaintext)]
 	  (layout/show-square ciphertext)))
 
 (defroutes home-routes
   (GET "/"  [] (home))
-  (POST "/" request (build-square request)))
+  (POST "/" request (build-square (:params request))))
