@@ -1,6 +1,7 @@
 (ns crypto-square-be.test.handler
   (:use clojure.test
         ring.mock.request
+        cheshire.core
         crypto-square-be.handler))
 
 (defn- encrypt [plaintext]
@@ -10,12 +11,14 @@
 
 (deftest crypto_square_be
   (testing "single word encryption"
-    (let [response (encrypt "abcd")]
+    (let [response (encrypt "abcd")
+          body (parse-string (:body response))]
       (is (= (:status response) 200))
-      (is (.contains (:body response) "acbd"))))
+      (is (.equals (get body "ciphertext") "acbd"))))
 
   (testing "multi word encryption"
-    (let [response (encrypt "ab+cd")]
+    (let [response (encrypt "ab+cd")
+          body (parse-string (:body response))]
       (is (= (:status response) 200))
-      (is (.contains (:body response) "acbd"))))
+      (is (.equals (get body "ciphertext") "acbd"))))
   )

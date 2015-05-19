@@ -3,11 +3,6 @@
             [clj-http.client :as client]
             [cheshire.core :as json]))
  
-(defn- square-size-request [plaintext]
-  (client/get 
-    (str "http://localhost:3001/" plaintext)
-    {:accept :json}))
- 
 (defn- normalise-request [plaintext]
   (client/get 
     (str "http://localhost:3002/" plaintext)
@@ -16,7 +11,12 @@
 (defn normalise-plaintext [text]
   (let [response (normalise-request text)
         json-body (json/parse-string (:body response))]
-    (get json-body "normalized-text")))
+    (get json-body "normalised-text")))
+ 
+(defn- square-size-request [plaintext]
+  (client/get 
+    (str "http://localhost:3001/" plaintext)
+    {:accept :json}))
  
 (defn square-size [text]
   (let [response (square-size-request text)
