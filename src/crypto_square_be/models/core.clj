@@ -8,15 +8,15 @@
     (str "http://localhost:3001/" plaintext)
     {:accept :json}))
  
-(defn- no-punctuation [c]
-  (or (Character/isLetter c)
-      (Character/isDigit c)))
+(defn- normalise-request [plaintext]
+  (client/get 
+    (str "http://localhost:3002/" plaintext)
+    {:accept :json}))
  
-(defn- remove-punctuation [text]
-  (clj-str/join "" (filter no-punctuation text)))
- 
-(defn normalize-plaintext [text]
-  (clj-str/lower-case (remove-punctuation text)))
+(defn normalise-plaintext [text]
+  (let [response (normalise-request text)
+        json-body (json/parse-string (:body response))]
+    (get json-body "normalized-text")))
  
 (defn square-size [text]
   (let [response (square-size-request text)
@@ -24,7 +24,7 @@
     (get json-body "size")))
  
 (defn plaintext-segments [text]
-  (let [normalized-text (normalize-plaintext text)
+  (let [normalized-text (normalise-plaintext text)
         segment-size (square-size normalized-text)]
     (map clj-str/join (partition-all segment-size normalized-text))))
  
