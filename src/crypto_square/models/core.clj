@@ -39,4 +39,4 @@
        (clj-str/join " ")))
  
 (defn ciphertext [text]
-  (remove-spaces (normalize-ciphertext text)))
+	(:body (client/get (str "http://localhost:3000/" text))))
