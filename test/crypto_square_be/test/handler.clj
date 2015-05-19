@@ -3,12 +3,19 @@
         ring.mock.request
         crypto-square-be.handler))
 
-(deftest test-app
-  (testing "main route"
-    (let [response (app (request :get "/"))]
-      (is (= (:status response) 200))
-      (is (.contains (:body response) "Hello World"))))
+(defn- encrypt [plaintext]
+  (app (request 
+        :get
+        (str "/" plaintext))))
 
-  (testing "not-found route"
-    (let [response (app (request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+(deftest crypto_square_be
+  (testing "single word encryption"
+    (let [response (encrypt "abcd")]
+      (is (= (:status response) 200))
+      (is (.contains (:body response) "acbd"))))
+
+  (testing "multi word encryption"
+    (let [response (encrypt "ab+cd")]
+      (is (= (:status response) 200))
+      (is (.contains (:body response) "acbd"))))
+  )
