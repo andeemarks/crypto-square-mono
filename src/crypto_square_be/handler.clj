@@ -4,7 +4,6 @@
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.middleware.logger :refer [wrap-with-logger]]
-            [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
             [compojure.route :as route]
             [crypto-square-be.routes.home :refer [home-routes]]))
@@ -22,7 +21,6 @@
 (def app
   (-> (routes home-routes app-routes)
       (handler/site)
-      (wrap-base-url)
       (wrap-with-logger)
       (wrap-json-body)
       (wrap-json-response)))

@@ -1,5 +1,12 @@
 (ns crypto-square-be.models.core
-  (:require [clojure.string :as clj-str]))
+  (:require [clojure.string :as clj-str]
+            [clj-http.client :as client]
+            [cheshire.core :as json]))
+ 
+(defn- square-size-request [plaintext]
+  (client/get 
+    (str "http://localhost:3001/" plaintext)
+    {:accept :json}))
  
 (defn- no-punctuation [c]
   (or (Character/isLetter c)
@@ -12,7 +19,9 @@
   (clj-str/lower-case (remove-punctuation text)))
  
 (defn square-size [text]
-  (int (Math/ceil (Math/sqrt (count text)))))
+  (let [response (square-size-request text)
+        json-body (json/parse-string (:body response))]
+    (get json-body "size")))
  
 (defn plaintext-segments [text]
   (let [normalized-text (normalize-plaintext text)
