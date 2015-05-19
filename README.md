@@ -18,7 +18,7 @@ You will need [Leiningen][2] 1.7.0 or above installed.
 
 To start a web server for the application, run:
 
-    lein ring server 3002
+    lein ring server 3003
 
 ## License
 
