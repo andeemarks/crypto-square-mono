@@ -1,9 +1,6 @@
-(ns normaliser.views.layout
-  (:require [hiccup.page :refer [html5 include-css]]))
+(ns normaliser.views.layout)
 
-(defn common [& body]
-  (html5
-    [:head
-     [:title "Welcome to normaliser"]
-     (include-css "/css/screen.css")]
-    [:body body]))
+(defn json-response [data & [status]]
+  {:status  (or status 200)
+   :headers {"Content-Type" "application/json; charset=utf-8"}
+   :body    data})
