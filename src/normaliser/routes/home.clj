@@ -4,7 +4,7 @@
             [normaliser.views.layout :as layout]))
 
 (defn home [plaintext]
-  (layout/json-response {:normalized-text (model/normalise plaintext)}))
+  (layout/json-response {:normalised-text (model/normalise plaintext)}))
 
 (defroutes home-routes
   (GET  "/:plaintext" [plaintext] (home plaintext)))
