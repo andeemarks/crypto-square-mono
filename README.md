@@ -1,12 +1,14 @@
 # normaliser
 
-A toy Compojure microservice built for a presentation at [Yow West 2015][https://a.confui.com/-LsHgG00I]
+A toy Compojure microservice built for a presentation at [Yow West 2015][1]
+
+[1]: https://a.confui.com/-LsHgG00I
 
 ## Prerequisites
 
-You will need [Leiningen][1] 1.7.0 or above installed.
+You will need [Leiningen][2] 1.7.0 or above installed.
 
-[1]: https://github.com/technomancy/leiningen
+[2]: https://github.com/technomancy/leiningen
 
 ## Running
 
