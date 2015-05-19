@@ -1,5 +1,6 @@
 (ns crypto-square.models.core
-	(:require [clojure.string :as clj-str]))
+	(:require [clojure.string :as clj-str])
+	(:require [clj-http.client :as client]))
  
 (defn- no-punctuation [c]
   (or (Character/isLetter c)
