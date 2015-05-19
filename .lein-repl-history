@@ -1,0 +1,3 @@
+(def n {"ciphertext" "acbd"})
+(get-in n "ciphertext")
+(get n "ciphertext")
