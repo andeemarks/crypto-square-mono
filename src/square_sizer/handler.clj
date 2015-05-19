@@ -2,7 +2,8 @@
   (:require [compojure.core :refer [defroutes routes]]
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
-            [hiccup.middleware :refer [wrap-base-url]]
+            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [ring.middleware.logger :refer [wrap-with-logger]]
             [compojure.handler :as handler]
             [compojure.route :as route]
             [square-sizer.routes.home :refer [home-routes]]))
@@ -20,4 +21,6 @@
 (def app
   (-> (routes home-routes app-routes)
       (handler/site)
-      (wrap-base-url)))
+      (wrap-with-logger)
+      (wrap-json-body)
+      (wrap-json-response)))

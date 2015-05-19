@@ -4,11 +4,18 @@
         square-sizer.handler))
 
 (deftest test-app
-  (testing "main route"
+  (testing "handles empty input gracefully"
     (let [response (app (request :get "/"))]
       (is (= (:status response) 200))
-      (is (.contains (:body response) "Hello World"))))
+      (is (.contains (:body response) "0"))))
 
-  (testing "not-found route"
-    (let [response (app (request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+  (testing "size when plaintext length is exact square"
+    (let [response (app (request :get "/abcd"))]
+      (is (= (:status response) 200))
+      (is (.contains (:body response) "2"))))
+
+  (testing "size when plaintext length is not square"
+    (let [response (app (request :get "/abcde"))]
+      (is (= (:status response) 200))
+      (is (.contains (:body response) "3")))))
+

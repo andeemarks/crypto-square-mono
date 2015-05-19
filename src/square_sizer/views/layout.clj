@@ -1,9 +1,6 @@
-(ns square-sizer.views.layout
-  (:require [hiccup.page :refer [html5 include-css]]))
+(ns square-sizer.views.layout)
 
-(defn common [& body]
-  (html5
-    [:head
-     [:title "Welcome to square-sizer"]
-     (include-css "/css/screen.css")]
-    [:body body]))
+(defn json-response [data & [status]]
+  {:status  (or status 200)
+   :headers {"Content-Type" "application/json; charset=utf-8"}
+   :body    data})
