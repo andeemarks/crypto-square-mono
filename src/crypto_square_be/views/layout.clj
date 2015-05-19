@@ -1,7 +1,6 @@
-(ns crypto-square-be.views.layout
-  (:require [cheshire.core :as json]))
+(ns crypto-square-be.views.layout)
 
 (defn json-response [data & [status]]
   {:status  (or status 200)
-   :headers {"Content-Type" "application/hal+json; charset=utf-8"}
-   :body    (json/generate-string data)})
+   :headers {"Content-Type" "application/json; charset=utf-8"}
+   :body    data})

@@ -6,6 +6,7 @@
                  [hiccup "1.0.5"]
                  [cheshire "5.4.0"]
                  [ring/ring-json "0.3.1"]
+                 [ring.middleware.logger "0.5.0"]
                  [ring-server "0.3.1"]]
   :plugins [[lein-ring "0.8.12"]]
   :ring {:handler crypto-square-be.handler/app
