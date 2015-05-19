@@ -1,6 +1,10 @@
 # normaliser
 
-A toy Compojure microservice built for a presentation at [Yow West 2015][1]
+A toy Compojure microservice built for a presentation at [Yow West 2015][1].
+
+This service implements a small part of the algorithm found [here][3].
+
+[3]: http://garajeando.blogspot.com.au/2015/05/exercism-crypto-square-in-clojure.html
 
 [1]: https://a.confui.com/-LsHgG00I
 
