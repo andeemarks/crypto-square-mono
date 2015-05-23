@@ -1,5 +1,6 @@
 (ns square-sizer.models.core
   (:require 
+    [clojure.tools.logging :as log]
     [riemann.client :as riemann]))
 
 (defn- send-event [text]
@@ -9,7 +10,7 @@
                   {:service "square-sizer" :description text})
           (riemann/close-client c))
     (catch java.io.IOException ex 
-      (prn "Cannot find Riemann!"))))
+      (log/warn "Cannot find Riemann!"))))
  
 (defn square-size [text]
   (send-event text)

@@ -3,6 +3,7 @@
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
+            [ring.middleware.logger :refer [wrap-with-logger]]
             [compojure.handler :as handler]
             [compojure.route :as route]
             [square-sizer.routes.home :refer [home-routes]]))
@@ -21,4 +22,5 @@
   (-> (routes home-routes app-routes)
       (handler/site)
       (wrap-json-body)
+      (wrap-with-logger)
       (wrap-json-response)))
