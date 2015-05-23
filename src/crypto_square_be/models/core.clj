@@ -1,6 +1,7 @@
 (ns crypto-square-be.models.core
   (:require [clojure.string :as clj-str]
             [clj-http.client :as client]
+            [clojure.tools.logging :as log]
             [riemann.client :as riemann]
             [cheshire.core :as json]))
  
@@ -54,7 +55,7 @@
                   {:service "crypto-square-be" :description plaintext})
           (riemann/close-client c))
     (catch java.io.IOException ex 
-      (prn "Cannot find Riemann!"))))
+      (log/warn "Cannot find Riemann!"))))
  
 (defn ciphertext [text]
   (send-event text)
