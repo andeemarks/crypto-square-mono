@@ -18,6 +18,17 @@ To start a web server for the application, run:
 
     lein ring server 4000
 
+## Browser Tests
+
+To test the app using [clj-webdriver][4] on port 5744, run:
+
+    lein test
+
+Note: this assumes you have the [Chrome Driver][5] installed at ~/bin/chromedriver
+
 ## License
 
 Copyright © 2015
+
+[4]: https://github.com/semperos/clj-webdriver
+[5]: https://sites.google.com/a/chromium.org/chromedriver/
