@@ -2,6 +2,7 @@
 	(:require 
 		[clj-http.client :as client]
 		[riemann.client :as riemann]
+    [clojure.tools.logging :as log]
 		[cheshire.core :as json]))
  
 (defn- ciphertext-request [plaintext]
@@ -18,7 +19,7 @@
 	                {:service "crypto-square" :description plaintext})
 	        (riemann/close-client c))
 		(catch java.io.IOException ex 
-			(prn "Cannot find Riemann!"))))
+			(log/warn "Cannot find Riemann!"))))
 
 (defn ciphertext [plaintext]
 	(let [response (ciphertext-request plaintext)

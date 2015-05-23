@@ -5,6 +5,8 @@
                  [compojure "1.1.6"]
                  [hiccup "1.0.5"]
                  [clj-http "1.1.2"]
+                 [ring.middleware.logger "0.5.0"]
+                 [org.clojure/tools.logging "0.3.1"]
                  [riemann-clojure-client "0.2.11"]
                  [ring-server "0.3.1"]]
   :plugins [[lein-ring "0.8.12"]]
