@@ -47,4 +47,6 @@
        (clj-str/join " ")))
  
 (defn ciphertext [text]
-  (remove-spaces (normalize-ciphertext text)))
+  (if (empty? text)
+    ""
+    (remove-spaces (normalize-ciphertext text))))
