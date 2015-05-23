@@ -1,6 +1,7 @@
 (ns crypto-square-be.models.core
   (:require [clojure.string :as clj-str]
             [clj-http.client :as client]
+            [riemann.client :as riemann]
             [cheshire.core :as json]))
  
 (defn- normalise-request [plaintext]
@@ -45,8 +46,18 @@
   (->> text
        segments-in-columns
        (clj-str/join " ")))
+
+(defn- send-event [plaintext]
+  (try
+    (let [c (riemann/tcp-client {:host "127.0.0.1"})]
+          (riemann/send-event c
+                  {:service "crypto-square-be" :description plaintext})
+          (riemann/close-client c))
+    (catch java.io.IOException ex 
+      (prn "Cannot find Riemann!"))))
  
 (defn ciphertext [text]
+  (send-event text)
   (if (empty? text)
     ""
     (remove-spaces (normalize-ciphertext text))))

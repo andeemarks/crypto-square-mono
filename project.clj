@@ -5,6 +5,7 @@
                  [compojure "1.1.6"]
                  [cheshire "5.4.0"]
                  [clj-http "1.1.2"]
+                 [riemann-clojure-client "0.2.11"]
                  [ring/ring-json "0.3.1"]
                  [ring.middleware.logger "0.5.0"]
                  [ring-server "0.3.1"]]
