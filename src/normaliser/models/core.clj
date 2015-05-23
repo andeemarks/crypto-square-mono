@@ -1,6 +1,7 @@
 (ns normaliser.models.core
 	(:require 
     	[riemann.client :as riemann]
+    	[clojure.tools.logging :as log]
 		[clojure.string :as clj-str]))
 
 (defn- send-event [text]
@@ -10,7 +11,7 @@
                   {:service "normaliser" :description text})
           (riemann/close-client c))
     (catch java.io.IOException ex 
-      (prn "Cannot find Riemann!"))))
+      (log/warn "Cannot find Riemann!"))))
 
 (defn- no-punctuation [c]
   (or (Character/isLetter c)
