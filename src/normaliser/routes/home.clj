@@ -7,4 +7,5 @@
   (layout/json-response {:normalised-text (model/normalise plaintext)}))
 
 (defroutes home-routes
-  (GET  "/:plaintext" [plaintext] (home plaintext)))
+  (GET  "/:plaintext" [plaintext] (home plaintext))
+  (GET  "/" [] (home "")))

@@ -6,6 +6,12 @@
         ring.util.codec))
 
 (deftest test-app
+  (testing "gracefully handles no input"
+    (let [response (app (request :get "/"))
+          body (parse-string (:body response))]
+      (is (= (:status response) 200))
+      (is (.equals (get body "normalised-text") ""))))
+
   (testing "already normal text is unchanged"
     (let [response (app (request :get "/abcd1234"))
           body (parse-string (:body response))]
