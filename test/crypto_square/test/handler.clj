@@ -11,5 +11,10 @@
 
 (deftest encryption
   (to test-base-url)
-  (input-text "textarea#plaintext" "macromonitoring for microservices")
-  (submit "input#encrypt"))
+
+  (input-text "#plaintext" "macromonitoring for microservices")
+  (take-screenshot :file "./before.png")
+  (submit "input#encrypt")
+
+  (is (= (text "#heading") "The cyphertext is"))
+  (is (= (value "#ciphertext") "moimesannircigcvrtfrioooocmrrse")))

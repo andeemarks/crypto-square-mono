@@ -18,7 +18,7 @@
   (common 
   	[:body 
 			(form-to [:post "/"] 
-	  		(text-area {:rows 6 :cols 40} :plaintext) 
+	  		(text-area {:rows 6 :cols 40 } :plaintext) 
 				"<br>"
 	  		(submit-button {:id "encrypt"} "Generate square"))]))
 
@@ -26,8 +26,8 @@
   (common 
   	[:body
 			(html
-				[:h3 "The cyphertext is"]
+				[:h3 {:id "heading"} "The cyphertext is"]
 				"<br>"
-				(label {:id :ciphertext} :ciphertext ciphertext)
+				(text-field {:id :ciphertext} {:value ciphertext})
 				"<br>"
 				[:h4 (link-to "/" "Again?")])]))

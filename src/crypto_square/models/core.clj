@@ -10,6 +10,7 @@
 		"http://localhost:3000"
 		{:body (json/generate-string {:plaintext plaintext})
 		 :content-type :json
+		 :headers {"X-Correlation-Id" "2"}
 		 :accept :json}))
 
 (defn- send-event [plaintext]
