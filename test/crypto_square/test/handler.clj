@@ -6,5 +6,10 @@
 (use-fixtures :once with-server with-browser)
 
 (deftest homepage-greeting
-    (to test-base-url)
-    (is (= (text "body") "Crypto Square")))
+  (to test-base-url)
+  (is (= (text "body") "Crypto Square")))
+
+(deftest encryption
+  (to test-base-url)
+  (input-text "textarea#plaintext" "macromonitoring for microservices")
+  (submit "input#encrypt"))

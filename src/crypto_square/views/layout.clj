@@ -20,7 +20,7 @@
 			(form-to [:post "/"] 
 	  		(text-area {:rows 6 :cols 40} :plaintext) 
 				"<br>"
-	  		(submit-button "Generate square"))]))
+	  		(submit-button {:id "encrypt"} "Generate square"))]))
 
 (defn show-square [ciphertext] 
   (common 
