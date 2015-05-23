@@ -5,11 +5,17 @@
         crypto-square-be.handler))
 
 (defn- encrypt [plaintext]
-  (app (request 
-        :get
-        (str "/" plaintext))))
+  (app 
+    (request :get 
+      (str "/" plaintext))))
 
 (deftest crypto_square_be
+  (testing "graceful handling of no input"
+    (let [response (encrypt "")
+          body (parse-string (:body response))]
+      (is (= (:status response) 200))
+      (is (.equals (get body "ciphertext") ""))))
+
   (testing "single word encryption"
     (let [response (encrypt "abcd")
           body (parse-string (:body response))]
