@@ -4,11 +4,15 @@
             [clojure.tools.logging :as log]
             [riemann.client :as riemann]
             [cheshire.core :as json]))
- 
+
+; (def ^:dynamic correlation-id)
+(def ^:private correlation-id (atom nil))
+
 (defn- normalise-request [plaintext]
   (client/get 
     (str "http://localhost:3002/" plaintext)
-    {:accept :json}))
+    {:accept :json
+     :headers {"X-Correlation-Id" @correlation-id}}))
  
 (defn normalise-plaintext [text]
   (let [response (normalise-request text)
@@ -18,7 +22,8 @@
 (defn- square-size-request [plaintext]
   (client/get 
     (str "http://localhost:3001/" plaintext)
-    {:accept :json}))
+    {:accept :json
+     :headers {"X-Correlation-Id" @correlation-id}}))
  
 (defn square-size [text]
   (let [response (square-size-request text)
@@ -57,7 +62,8 @@
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
  
-(defn ciphertext [text]
+(defn ciphertext [text corr-id]
+  (reset! correlation-id corr-id)
   (send-event text)
   (if (empty? text)
     ""
