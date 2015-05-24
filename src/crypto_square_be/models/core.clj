@@ -3,9 +3,12 @@
             [clj-http.client :as client]
             [clojure.tools.logging :as log]
             [riemann.client :as riemann]
+            [metrics.timers :as timer]
             [cheshire.core :as json]))
 
 (def ^:private correlation-id (atom nil))
+
+(timer/deftimer processing-time)
 
 (defn- normalise-request [plaintext]
   (client/get 
