@@ -4,13 +4,15 @@
 		[riemann.client :as riemann]
     [clojure.tools.logging :as log]
 		[cheshire.core :as json]))
- 
+
+(defn- corr-id [] (str (java.util.UUID/randomUUID)))
+
 (defn- ciphertext-request [plaintext]
 	(client/post 
 		"http://localhost:3000"
 		{:body (json/generate-string {:plaintext plaintext})
 		 :content-type :json
-		 :headers {"X-Correlation-Id" "2"}
+		 :headers {"X-Correlation-Id" (corr-id)}
 		 :accept :json}))
 
 (defn- send-event [plaintext]
