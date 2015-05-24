@@ -17,10 +17,17 @@
 (defn input-form [] 
   (common 
   	[:body 
-			(form-to [:post "/encrypt"] 
-	  		(text-area {:rows 6 :cols 40 } :plaintext) 
-				"<br>"
-	  		(submit-button {:id "encrypt"} "Generate square"))]))
+			(form-to {:class "dark-matter"} [:post "/encrypt"] 
+        [:h1 "Enter your plaintext here"] 
+
+        "<label>"
+          "<span>Plaintext</span>"
+  		    (text-field {:size 40 } :plaintext)
+        "</label>"
+        "<label>"
+          "<span>&nbsp;</span>"
+	  		 (submit-button {:id "encrypt" :class "button"} "Encryptionise!")
+        "</label>")]))
 
 (defn show-square [ciphertext] 
   (common 
