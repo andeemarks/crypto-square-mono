@@ -62,7 +62,7 @@
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
  
-(defn ciphertext [text corr-id]
+(defn ciphertext [text & corr-id]
   (reset! correlation-id corr-id)
   (send-event text)
   (if (empty? text)
