@@ -5,7 +5,7 @@
     [clojure.tools.logging :as log]
 		[cheshire.core :as json]))
 
-(defn- corr-id [] (str (java.util.UUID/randomUUID)))
+(defn- corr-id [] (str "crypto-square-" (java.util.UUID/randomUUID)))
 
 (defn- ciphertext-request [plaintext]
 	(client/post 
