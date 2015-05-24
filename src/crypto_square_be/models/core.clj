@@ -55,14 +55,14 @@
 (defn- send-event [plaintext]
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
-          (riemann/send-event c
-                  {:service "crypto-square-be" :description plaintext})
-          (riemann/close-client c))
+      (riemann/send-event c
+        {:service "crypto-square-be" :description @correlation-id})
+      (riemann/close-client c))
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
  
 (defn ciphertext [text & corr-id]
-  (reset! correlation-id corr-id)
+  (reset! correlation-id (first corr-id))
   (send-event text)
   (if (empty? text)
     ""
