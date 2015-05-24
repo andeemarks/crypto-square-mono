@@ -22,7 +22,7 @@
 
         "<label>"
           "<span>Plaintext</span>"
-  		    (text-field {:size 40 } :plaintext)
+  		    (text-field {:size 40 } :plaintext "<Enter your plaintext here>")
         "</label>"
         "<label>"
           "<span>&nbsp;</span>"
