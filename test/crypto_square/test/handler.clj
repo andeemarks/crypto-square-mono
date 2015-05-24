@@ -5,9 +5,9 @@
 
 (use-fixtures :once with-server with-browser)
 
-(deftest homepage-greeting
-  (to test-base-url)
-  (is (= (text "body") "Crypto Square")))
+; (deftest homepage-greeting
+;   (to test-base-url)
+;   (is (= (text "body") "Crypto Square")))
 
 (deftest encryption
   (to test-base-url)
@@ -18,5 +18,4 @@
 
   (submit "#encrypt")
 
-  (is (= (text "#heading") "The cyphertext is"))
   (is (= "moimesannircigcvrtfrioooocmrrse" (text "#ciphertext"))))
