@@ -2,13 +2,16 @@
 	(:require 
     	[riemann.client :as riemann]
     	[clojure.tools.logging :as log]
+    	[metrics.timers :as timer]
 		[clojure.string :as clj-str]))
 
-(defn- send-event [text corr-id]
+(timer/deftimer processing-time)
+
+(defn- send-event [text corr-id elapsed-time]
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
       (riemann/send-event c
-      	{:service "normaliser" :description corr-id})
+      	{:service "normaliser" :metric elapsed-time :description corr-id})
       (riemann/close-client c))
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
@@ -19,7 +22,13 @@
  
 (defn- remove-punctuation [text]
   (clj-str/join "" (filter no-punctuation text)))
- 
+
+(defn- normalise-text [text]
+	(clj-str/lower-case (remove-punctuation text)))
+
 (defn normalise [text corr-id]
-  (send-event text corr-id)
-  (clj-str/lower-case (remove-punctuation text)))
+  (let [timer (timer/start processing-time)
+        result (normalise-text text)
+        elapsed-time (timer/stop timer)]
+      (send-event text corr-id elapsed-time)
+      result))
