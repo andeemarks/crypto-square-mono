@@ -4,7 +4,7 @@
             [square-sizer.views.layout :as layout]))
 
 (defn home [plaintext]
-  (layout/json-response {:size (model/square-size plaintext)}))
+  (layout/json-response {:size (model/square-size plaintext "")}))
 
 (defroutes home-routes
   (GET  "/:plaintext" [plaintext] (home plaintext))
