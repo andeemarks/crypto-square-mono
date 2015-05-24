@@ -32,9 +32,21 @@
 (defn show-square [ciphertext] 
   (common 
   	[:body
-			(html
-				[:h3 {:id "heading"} "The cyphertext is"]
-				"<br>"
-        [:div#ciphertext ciphertext]
-				"<br>"
-				[:h4 (link-to "/" "Again?")])]))
+      (form-to {:class "dark-matter"} [:get "/"] 
+        [:h1 "Encryption complete!"] 
+
+        "<label>"
+          "<span>Ciphertext</span>"
+          (text-field {:id "ciphertext"} :ciphertext ciphertext)
+        "</label>"
+        "<label>"
+          "<span>&nbsp;</span>"
+         (submit-button {:id "again" :class "button"} "Again!")
+        "</label>")]))
+
+			; (html
+			; 	[:h3 {:id "heading"} "The cyphertext is"]
+			; 	"<br>"
+   ;      [:div#ciphertext ciphertext]
+			; 	"<br>"
+			; 	[:h4 (link-to "/" "Again?")])]))
