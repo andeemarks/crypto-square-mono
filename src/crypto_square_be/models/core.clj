@@ -5,7 +5,6 @@
             [riemann.client :as riemann]
             [cheshire.core :as json]))
 
-; (def ^:dynamic correlation-id)
 (def ^:private correlation-id (atom nil))
 
 (defn- normalise-request [plaintext]

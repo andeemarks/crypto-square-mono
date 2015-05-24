@@ -6,7 +6,7 @@
   	[crypto-square-be.models.core :as model]))
 
 (defn home 
-	[plaintext & corr-id]
+	[plaintext corr-id]
   (layout/json-response {:ciphertext (model/ciphertext plaintext corr-id)} corr-id))
 
 (defroutes home-routes
@@ -14,6 +14,6 @@
   	(home 
   		(get-in request [:body "plaintext"]) 
   		(get-in request [:headers "x-correlation-id"])))
-  (GET  "/:plaintext" [plaintext] (home plaintext))
-  (GET  "/" request (home ""))
+  (GET  "/:plaintext" [plaintext] (home plaintext nil))
+  (GET  "/" request (home "" nil))
   )
