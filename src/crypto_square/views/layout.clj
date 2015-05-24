@@ -28,6 +28,6 @@
 			(html
 				[:h3 {:id "heading"} "The cyphertext is"]
 				"<br>"
-				(text-field {:id :ciphertext} {:value ciphertext})
+        [:div#ciphertext ciphertext]
 				"<br>"
 				[:h4 (link-to "/" "Again?")])]))

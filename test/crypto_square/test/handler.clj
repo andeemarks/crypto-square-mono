@@ -13,8 +13,10 @@
   (to test-base-url)
 
   (input-text "#plaintext" "macromonitoring for microservices")
-  (take-screenshot :file "./before.png")
-  (submit "input#encrypt")
+
+  ; (take-screenshot :file "./before.png")
+
+  (submit "#encrypt")
 
   (is (= (text "#heading") "The cyphertext is"))
-  (is (= (value "#ciphertext") "moimesannircigcvrtfrioooocmrrse")))
+  (is (= "moimesannircigcvrtfrioooocmrrse" (text "#ciphertext"))))
