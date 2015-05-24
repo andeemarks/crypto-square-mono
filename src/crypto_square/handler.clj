@@ -3,6 +3,8 @@
             [ring.middleware.resource :refer [wrap-resource]]
             [ring.middleware.file-info :refer [wrap-file-info]]
             [ring.middleware.logger :refer [wrap-with-logger]]
+            [metrics.ring.expose :refer [expose-metrics-as-json]]
+            [metrics.ring.instrument :refer [instrument]]
             [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
             [compojure.route :as route]
@@ -22,4 +24,6 @@
   (-> (routes home-routes app-routes)
       (handler/site)
       (wrap-with-logger)
-      (wrap-base-url)))
+      (wrap-base-url)
+      ; (instrument)
+      ))

@@ -8,6 +8,7 @@
                  [ring.middleware.logger "0.5.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [metrics-clojure "2.5.1"]
+                 [metrics-clojure-ring "2.0.0"]
                  [riemann-clojure-client "0.2.11"]
                  [ring-server "0.3.1"]]
   :plugins [[lein-ring "0.8.12"]]
