@@ -17,7 +17,7 @@
 (defn input-form [] 
   (common 
   	[:body 
-			(form-to [:post "/"] 
+			(form-to [:post "/encrypt"] 
 	  		(text-area {:rows 6 :cols 40 } :plaintext) 
 				"<br>"
 	  		(submit-button {:id "encrypt"} "Generate square"))]))

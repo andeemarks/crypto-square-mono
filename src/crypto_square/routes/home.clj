@@ -13,4 +13,4 @@
 
 (defroutes home-routes
   (GET "/"  [] (home))
-  (POST "/" request (build-square (:params request))))
+  (POST "/encrypt" request (build-square (:params request))))
