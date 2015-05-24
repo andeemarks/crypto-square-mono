@@ -4,12 +4,12 @@
     	[clojure.tools.logging :as log]
 		[clojure.string :as clj-str]))
 
-(defn- send-event [text]
+(defn- send-event [text corr-id]
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
-          (riemann/send-event c
-                  {:service "normaliser" :description text})
-          (riemann/close-client c))
+      (riemann/send-event c
+      	{:service "normaliser" :description corr-id})
+      (riemann/close-client c))
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
 
@@ -20,6 +20,6 @@
 (defn- remove-punctuation [text]
   (clj-str/join "" (filter no-punctuation text)))
  
-(defn normalise [text]
-  (send-event text)
+(defn normalise [text corr-id]
+  (send-event text corr-id)
   (clj-str/lower-case (remove-punctuation text)))
