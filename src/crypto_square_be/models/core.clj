@@ -4,6 +4,7 @@
             [clojure.tools.logging :as log]
             [riemann.client :as riemann]
             [metrics.timers :as timer]
+            [ring.util.codec :refer [url-encode]]
             [cheshire.core :as json]))
 
 (def ^:private correlation-id (atom nil))
@@ -12,7 +13,7 @@
 
 (defn- normalise-request [plaintext]
   (client/get 
-    (str "http://localhost:3002/" plaintext)
+    (str "http://localhost:3002/" (url-encode plaintext))
     {:accept :json
      :headers {"X-Correlation-Id" @correlation-id}}))
  
