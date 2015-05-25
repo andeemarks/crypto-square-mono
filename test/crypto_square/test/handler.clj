@@ -12,4 +12,13 @@
 
   (submit "#encrypt")
 
-  (is (= "moimesannircigcvrtfrioooocmrrse" (value "#ciphertext"))))
+  (is (= "moimesannircigcvrtfrioooocmrrse" (value "#ciphertext")) "Encryption incorrect!"))
+
+(deftest ^:synth synthetic-trans-generator
+  (to test-base-url)
+
+  (input-text "#plaintext" "Macromonitoring for Microservices")
+
+  (submit "#encrypt")
+
+  (is (= "moimesannircigcvrtfrioooocmrrse" (value "#ciphertext")) "Encryption incorrect!"))

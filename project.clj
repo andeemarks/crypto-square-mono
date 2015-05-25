@@ -15,6 +15,9 @@
   :ring {:handler crypto-square.handler/app
          :init crypto-square.handler/init
          :destroy crypto-square.handler/destroy}
+  :test-selectors { :default (complement :synth)
+                    :synth :synth
+                    :all (constantly true)}
   :profiles
   {:uberjar {:aot :all}
    :production
