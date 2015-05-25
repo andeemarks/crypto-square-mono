@@ -22,7 +22,7 @@
 	(try
 		(let [c (riemann/tcp-client {:host "127.0.0.1"})]
 	        (riemann/send-event c
-	                {:service "crypto-square" :metric (/ elapsed-time 1000) :state "ok" :description corr-id})
+	                {:service "crypto-square" :metric (/ elapsed-time 1000000) :state "ok" :description corr-id})
 	        (riemann/close-client c))
 		(catch java.io.IOException ex 
 			(log/warn "Cannot find Riemann!"))))
