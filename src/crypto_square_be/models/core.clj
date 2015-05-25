@@ -56,18 +56,22 @@
        segments-in-columns
        (clj-str/join " ")))
 
-(defn- send-event [plaintext]
+(defn- send-event [plaintext elapsed-time]
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
       (riemann/send-event c
-        {:service "crypto-square-be" :description @correlation-id})
+        {:service "crypto-square-be" :metric (/ elapsed-time 1000) :state "ok" :description @correlation-id})
       (riemann/close-client c))
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
  
 (defn ciphertext [text & corr-id]
   (reset! correlation-id (first corr-id))
-  (send-event text)
-  (if (empty? text)
-    ""
-    (remove-spaces (normalize-ciphertext text))))
+  (let [timer (timer/start processing-time)
+        result   (if (empty? text)
+                    ""
+                    (remove-spaces (normalize-ciphertext text)))
+        elapsed-time (timer/stop timer)]
+      (send-event text elapsed-time)
+      result))
+)
