@@ -5,7 +5,7 @@
 
 (use-fixtures :once with-browser)
 
-(deftest encryption
+(defn- test-encryption-happy-path []
   (to test-base-url)
 
   (input-text "#plaintext" "Macromonitoring for Microservices")
@@ -13,12 +13,14 @@
   (submit "#encrypt")
 
   (is (= "moimesannircigcvrtfrioooocmrrse" (value "#ciphertext")) "Encryption incorrect!"))
+
+(defmacro forever [& body] 
+  `(while true ~@body))
+
+(deftest encryption
+  (test-encryption-happy-path))
 
 (deftest ^:synth synthetic-trans-generator
-  (to test-base-url)
-
-  (input-text "#plaintext" "Macromonitoring for Microservices")
-
-  (submit "#encrypt")
-
-  (is (= "moimesannircigcvrtfrioooocmrrse" (value "#ciphertext")) "Encryption incorrect!"))
+  (forever 
+    (test-encryption-happy-path)
+    (Thread/sleep 10000)))
