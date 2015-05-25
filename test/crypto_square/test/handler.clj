@@ -23,4 +23,4 @@
 (deftest ^:synth synthetic-trans-generator
   (forever 
     (test-encryption-happy-path)
-    (Thread/sleep 10000)))
+    (Thread/sleep 5000)))
