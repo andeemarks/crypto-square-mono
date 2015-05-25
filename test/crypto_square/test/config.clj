@@ -3,7 +3,7 @@
             [clj-webdriver.taxi :refer :all]
             [crypto-square.routes.home :refer [home-routes]]))
 
-(def test-port 5744)
+(def test-port 4000)
 (def test-host "localhost")
 (def test-base-url (str "http://" test-host ":" test-port "/"))
 

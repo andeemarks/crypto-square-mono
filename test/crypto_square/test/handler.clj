@@ -3,19 +3,13 @@
             [clj-webdriver.taxi :refer :all]
             [crypto-square.test.config :refer :all]))
 
-(use-fixtures :once with-server with-browser)
-
-; (deftest homepage-greeting
-;   (to test-base-url)
-;   (is (= (text "body") "Crypto Square")))
+(use-fixtures :once with-browser)
 
 (deftest encryption
   (to test-base-url)
 
-  (input-text "#plaintext" "macromonitoring for microservices")
-
-  ; (take-screenshot :file "./before.png")
+  (input-text "#plaintext" "Macromonitoring for Microservices")
 
   (submit "#encrypt")
 
-  (is (= "moimesannircigcvrtfrioooocmrrse" (text "#ciphertext"))))
+  (is (= "moimesannircigcvrtfrioooocmrrse" (value "#ciphertext"))))
