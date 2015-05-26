@@ -12,7 +12,7 @@
 		"error"
 		"ok"))
 
-(defn- send-event [text corr-id elapsed-time]
+(defn- send-event [corr-id elapsed-time]
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
       (riemann/send-event c
@@ -35,5 +35,5 @@
   (let [timer (timer/start processing-time)
         result (normalise-text text)
         elapsed-time (timer/stop timer)]
-      (send-event text corr-id elapsed-time)
+      (send-event corr-id elapsed-time)
       result))
