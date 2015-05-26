@@ -14,7 +14,6 @@
   (map #(format (str "%-" segments-size "s") %) segments))
 
 (defn- send-event [elapsed-time corr-id]
-  (log/info corr-id)
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
       (riemann/send-event c
@@ -24,9 +23,7 @@
       (log/warn "Cannot find Riemann!"))))
  
 (defn segments-in-columns [normalized-text segment-size]
-  (let [segments (plaintext-segments normalized-text segment-size)
-        ; segment-size (count (first segments))
-        ]
+  (let [segments (plaintext-segments normalized-text segment-size)]
     (apply map
            #(clj-str/trim (apply str %&))
            (pad-segments segments segment-size))))

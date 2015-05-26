@@ -5,7 +5,7 @@
 
 
 (defn home [plaintext segment-size corr-id]
-  (layout/json-response {:column-text (model/columnise plaintext segment-size "corr-id")}))
+  (layout/json-response {:column-text (model/columnise plaintext segment-size corr-id)}))
 
 (defroutes home-routes
   (GET  "/:plaintext/:segment-size" [plaintext segment-size :as request] 
