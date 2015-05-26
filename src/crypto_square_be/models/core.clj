@@ -33,18 +33,11 @@
         json-body (json/parse-string (:body response))]
     (get json-body "size")))
  
-(defn plaintext-segments [normalized-text segment-size]
-    (map clj-str/join (partition-all segment-size normalized-text)))
- 
-(defn- pad-segments [segments segments-size]
-  (map #(format (str "%-" segments-size "s") %) segments))
- 
-(defn- segments-in-columns [normalized-text segment-size]
-  (let [segments (plaintext-segments normalized-text segment-size)
-        segment-size (count (first segments))]
-    (apply map
-           #(clj-str/trim (apply str %&))
-           (pad-segments segments segment-size))))
+(defn- column-handler-request [normalized-text segment-size]
+  (client/get 
+    (str "http://localhost:3003/" normalized-text "/" segment-size)
+    {:accept :json
+     :headers {"X-Correlation-Id" @correlation-id}}))
  
 (defn- remove-spaces [text]
   (clj-str/replace text " " ""))
@@ -52,7 +45,9 @@
 (defn normalize-ciphertext [normalized-text segment-size]
   (clj-str/join 
     " " 
-    (segments-in-columns normalized-text segment-size)))
+    (let [response (column-handler-request normalized-text segment-size)
+          json-body (json/parse-string (:body response))]
+      (get json-body "column-text"))))
 
 (defn- generate-ciphertext [normalized-text segment-size]
   (remove-spaces 
