@@ -8,11 +8,12 @@
 (defn- test-encryption-happy-path []
   (to test-base-url)
 
-  (input-text "#plaintext" "Macromonitoring for Microservices")
+  (input-text "#plaintext" "\"Macromonitoring 4 Microservices\"")
 
   (submit "#encrypt")
 
-  (is (= "moimesannircigcvrtfrioooocmrrse" (value "#ciphertext")) "Encryption incorrect!"))
+  (is (= "moicvannricigocrt4seoomesmrir" (value "#ciphertext")) 
+         "Encryption incorrect!"))
 
 (defmacro forever [& body] 
   `(while true ~@body))
