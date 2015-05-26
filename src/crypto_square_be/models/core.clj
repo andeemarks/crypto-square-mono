@@ -33,16 +33,14 @@
         json-body (json/parse-string (:body response))]
     (get json-body "size")))
  
-(defn plaintext-segments [text]
-  (let [normalized-text (normalise-plaintext text)
-        segment-size (square-size normalized-text)]
-    (map clj-str/join (partition-all segment-size normalized-text))))
+(defn plaintext-segments [normalized-text segment-size]
+    (map clj-str/join (partition-all segment-size normalized-text)))
  
 (defn- pad-segments [segments segments-size]
   (map #(format (str "%-" segments-size "s") %) segments))
  
-(defn- segments-in-columns [text]
-  (let [segments (plaintext-segments text)
+(defn- segments-in-columns [normalized-text segment-size]
+  (let [segments (plaintext-segments normalized-text segment-size)
         segment-size (count (first segments))]
     (apply map
            #(clj-str/trim (apply str %&))
@@ -51,10 +49,10 @@
 (defn- remove-spaces [text]
   (clj-str/replace text " " ""))
  
-(defn normalize-ciphertext [text]
-  (->> text
-       segments-in-columns
-       (clj-str/join " ")))
+(defn normalize-ciphertext [normalized-text segment-size]
+  (clj-str/join 
+    " " 
+    (segments-in-columns normalized-text segment-size)))
 
 (defn- send-event [plaintext elapsed-time]
   (try
@@ -68,10 +66,11 @@
 (defn ciphertext [text & corr-id]
   (reset! correlation-id (first corr-id))
   (let [timer (timer/start processing-time)
+        normalized-text (normalise-plaintext text)
+        segment-size (square-size normalized-text)
         result   (if (empty? text)
                     ""
-                    (remove-spaces (normalize-ciphertext text)))
+                    (remove-spaces (normalize-ciphertext normalized-text segment-size)))
         elapsed-time (timer/stop timer)]
       (send-event text elapsed-time)
       result))
-)
