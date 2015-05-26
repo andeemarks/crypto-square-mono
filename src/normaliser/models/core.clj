@@ -9,7 +9,7 @@
 
 (defn- state [] 
 	(if (= 1 (rand-int 10))
-		"error"
+		"warning"
 		"ok"))
 
 (defn- send-event [corr-id elapsed-time]
