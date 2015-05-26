@@ -54,6 +54,10 @@
     " " 
     (segments-in-columns normalized-text segment-size)))
 
+(defn- generate-ciphertext [normalized-text segment-size]
+  (remove-spaces 
+    (normalize-ciphertext normalized-text segment-size)))
+
 (defn- send-event [plaintext elapsed-time]
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
@@ -70,7 +74,7 @@
         segment-size (square-size normalized-text)
         result   (if (empty? text)
                     ""
-                    (remove-spaces (normalize-ciphertext normalized-text segment-size)))
+                    (generate-ciphertext normalized-text segment-size))
         elapsed-time (timer/stop timer)]
       (send-event text elapsed-time)
       result))
