@@ -2,6 +2,8 @@
 
 A minimal Compojure web-app built for a presentation at [Yow West 2015][1], and providing a basic UI for the Crypto Square solution found [here][3].
 
+![](https://github.com/andeemarks/column-handler/blob/master/resources/public/img/services.png)
+
 ## Prerequisites
 
 You will need [Leiningen][2] 1.7.0 or above installed.
