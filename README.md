@@ -4,9 +4,7 @@ A toy Compojure microservice built for a presentation at [Yow West 2015][1].
 
 This service implements a small part of the Crypto Square solution found [here][3].  The granularity of this service is extreme and should _not_ be used as an example of how to pull apart a larger solution into services.
 
-[<img src="https://www.dropbox.com/s/6yqg3vcdccmxe13/Screenshot%202015-05-29%2020.23.53.png">](http://google.com.au/)
-
-[https://www.dropbox.com/s/6yqg3vcdccmxe13/Screenshot%202015-05-29%2020.23.53.png]
+![Service Architecture](./resources/img/services.png)
 
 [3]: http://garajeando.blogspot.com.au/2015/05/exercism-crypto-square-in-clojure.html
 
