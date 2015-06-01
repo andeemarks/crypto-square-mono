@@ -17,8 +17,6 @@
   (common 
   	[:body 
 			(form-to {:class "dark-matter"} [:post "/encrypt"] 
-        [:h1 "Enter your plaintext here"] 
-
         "<label>"
           "<span>Plaintext</span>"
   		    (text-field {:size 40 } :plaintext plaintext)
