@@ -9,7 +9,7 @@
 (defn build-square [params]
 	(let [plaintext (:plaintext params)
 				ciphertext (model/ciphertext plaintext)]
-	  (layout/show-square ciphertext)))
+	  (layout/input-form plaintext ciphertext)))
 
 (defroutes home-routes
   (GET "/"  [] (home))

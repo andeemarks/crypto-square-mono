@@ -13,8 +13,7 @@
     [:h1 "Crypto Square"] 
     [:body body]))
 
-
-(defn input-form [] 
+(defn- show-form [plaintext ciphertext]
   (common 
   	[:body 
 			(form-to {:class "dark-matter"} [:post "/encrypt"] 
@@ -22,25 +21,17 @@
 
         "<label>"
           "<span>Plaintext</span>"
-  		    (text-field {:size 40 } :plaintext)
+  		    (text-field {:size 40 } :plaintext plaintext)
+        "</label>"
+        "<label>"
+          "<span>Ciphertext</span>"
+          (text-field {:id "ciphertext"} :ciphertext ciphertext)
         "</label>"
         "<label>"
           "<span>&nbsp;</span>"
 	  		 (submit-button {:id "encrypt" :class "button"} "Encryptionise!")
         "</label>")]))
 
-(defn show-square [ciphertext] 
-  (common 
-  	[:body
-      (form-to {:class "dark-matter"} [:post "/"] 
-        [:h1 "Encryption complete!"] 
-
-        "<label>"
-          "<span>Ciphertext</span>"
-          (text-field {:id "ciphertext"} :ciphertext ciphertext)
-        "</label>")
-      (form-to {:class "dark-matter"} [:get "/"] 
-        "<label>"
-          "<span>&nbsp;</span>"
-         (submit-button {:id "again" :class "button"} "Again!")
-        "</label>")]))
+(defn input-form 
+  ([]                      (show-form "" ""))
+  ([plaintext ciphertext]  (show-form plaintext ciphertext)))
