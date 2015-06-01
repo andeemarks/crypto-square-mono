@@ -6,6 +6,7 @@
             [ring.middleware.logger :refer [wrap-with-logger]]
             [compojure.handler :as handler]
             [compojure.route :as route]
+            [crypto-square-be.models.middleware :refer [handle-correlation-ids]]
             [crypto-square-be.routes.home :refer [home-routes]]))
 
 (defn init []
@@ -23,4 +24,5 @@
       (handler/site)
       (wrap-with-logger)
       (wrap-json-body)
+      (handle-correlation-ids)
       (wrap-json-response)))
