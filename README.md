@@ -1,5 +1,7 @@
 # normaliser
 
+![](https://travis-ci.org/andeemarks/normaliser.svg?branch=master)
+
 A toy Compojure microservice built for a presentation at [Yow West 2015][1].
 
 This service implements a small part of the Crypto Square solution found [here][3].  The granularity of this service is extreme and should _not_ be used as an example of how to pull apart a larger solution into services.
