@@ -24,6 +24,12 @@ To start a web server for the application, run:
 
     ./up.sh
 
+## Tests
+
+To run the test suite:
+
+	lein test
+	
 ## License
 
 Copyright © 2015
