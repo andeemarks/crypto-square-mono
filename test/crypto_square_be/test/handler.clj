@@ -1,5 +1,5 @@
 (ns crypto-square-be.test.handler
-  (:use clojure.test
+  (:use midje.sweet
         ring.mock.request
         cheshire.core
         crypto-square-be.handler))
@@ -9,22 +9,22 @@
     (request :get 
       (str "/" plaintext))))
 
-(deftest crypto_square_be
-  (testing "graceful handling of no input"
+(facts "About GETs"
+  (fact "graceful handling of no input"
     (let [response (encrypt "")
           body (parse-string (:body response))]
-      (is (= (:status response) 200))
-      (is (.equals (get body "ciphertext") ""))))
+      (:status response) => 200
+      (get body "ciphertext") => ""))
 
-  (testing "single word encryption"
+  (fact "single word encryption"
     (let [response (encrypt "abcd")
           body (parse-string (:body response))]
-      (is (= (:status response) 200))
-      (is (.equals (get body "ciphertext") "acbd"))))
+      (:status response) => 200
+      (get body "ciphertext") => "acbd"))
 
-  (testing "multi word encryption"
+  (fact "multi word encryption"
     (let [response (encrypt "ab+cd")
           body (parse-string (:body response))]
-      (is (= (:status response) 200))
-      (is (.equals (get body "ciphertext") "acbd"))))
+      (:status response) => 200
+      (get body "ciphertext") => "acbd"))
   )
