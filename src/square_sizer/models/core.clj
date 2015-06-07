@@ -14,7 +14,7 @@
 (defn- metric [elapsed-time]
   (/ elapsed-time 1000000))
 
-(defn- send-event [corr-id elapsed-time]
+(defn send-event [corr-id elapsed-time]
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
           (riemann/send-event c

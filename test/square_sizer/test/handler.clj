@@ -1,25 +1,29 @@
 (ns square-sizer.test.handler
-  (:use clojure.test
+  (:use midje.sweet
+        square-sizer.models.core
         ring.mock.request
         cheshire.core        
         square-sizer.handler))
 
-(deftest test-app
-  (testing "handles empty input gracefully"
+(against-background [(send-event anything anything) => ..riemann..]
+
+(facts "when handling GETs"
+  (fact "handles empty input gracefully"
     (let [response (app (request :get "/"))
           body (parse-string (:body response))]
-      (is (= (:status response) 200))
-      (is (= (get body "size") 0))))
+      (:status response) => 200
+      (get body "size") => 0))
 
-  (testing "size when plaintext length is exact square"
+  (fact "size when plaintext length is exact square"
     (let [response (app (request :get "/abcd"))
           body (parse-string (:body response))]
-      (is (= (:status response) 200))
-      (is (= (get body "size") 2))))
+      (:status response) => 200
+      (get body "size") => 2))
 
-  (testing "size when plaintext length is not square"
+  (fact "size when plaintext length is not square"
     (let [response (app (request :get "/abcde"))
           body (parse-string (:body response))]
-      (is (= (:status response) 200))
-      (is (= (get body "size") 3)))))
+      (:status response) => 200
+      (get body "size") => 3))
 
+))
