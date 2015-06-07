@@ -11,3 +11,7 @@ pom.xml
 .lein-env
 
 *.scssc
+
+*.sublime-project
+
+*.sublime-workspace
