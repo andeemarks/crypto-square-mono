@@ -3,6 +3,7 @@
             [clj-http.client :as client]
             [clojure.tools.logging :as log]
             [crypto-square-be.services.normaliser :as normaliser]
+            [crypto-square-be.services.square-sizer :as square-sizer]
             [riemann.client :as riemann]
             [metrics.timers :as timer]
             [ring.util.codec :refer [url-encode]]
@@ -11,17 +12,6 @@
 (def ^:private correlation-id (atom nil))
 
 (timer/deftimer processing-time)
- 
-(defn- square-size-request [plaintext]
-  (client/get 
-    (str "http://localhost:3001/" plaintext)
-    {:accept :json
-     :headers {"X-Correlation-Id" @correlation-id}}))
- 
-(defn square-size [text]
-  (let [response (square-size-request text)
-        json-body (json/parse-string (:body response))]
-    (get json-body "size")))
  
 (defn- column-handler-request [normalized-text segment-size]
   (client/get 
@@ -56,7 +46,7 @@
   (reset! correlation-id (first corr-id))
   (let [timer (timer/start processing-time)
         normalized-text (normaliser/normalise-plaintext text @correlation-id)
-        segment-size (square-size normalized-text)
+        segment-size (square-sizer/square-size normalized-text @correlation-id)
         result   (if (empty? text)
                     ""
                     (generate-ciphertext normalized-text segment-size))
