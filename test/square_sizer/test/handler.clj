@@ -1,6 +1,6 @@
 (ns square-sizer.test.handler
   (:use midje.sweet
-        square-sizer.models.core
+        square-sizer.services.riemann
         ring.mock.request
         cheshire.core        
         square-sizer.handler))
