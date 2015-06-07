@@ -22,4 +22,5 @@
    {:dependencies [ [ring/ring-codec "1.0.0"] 
                     [midje "1.6.3"]
                     [ring-mock "0.1.5"] 
-                    [ring/ring-devel "1.3.1"]]}})
+                    [ring/ring-devel "1.3.1"]]
+    :plugins [[lein-midje "3.0.0"]]}})
