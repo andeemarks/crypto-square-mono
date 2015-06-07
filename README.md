@@ -1,6 +1,6 @@
 # normaliser
 
-![](https://travis-ci.org/andeemarks/normaliser.svg?branch=master)
+[![Build Status](https://travis-ci.org/andeemarks/normaliser.svg?branch=master)](https://travis-ci.org/andeemarks/normaliser)
 
 A toy Compojure microservice built for a presentation at [Yow West 2015][1].
 
