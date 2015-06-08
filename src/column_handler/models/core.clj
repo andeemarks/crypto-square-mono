@@ -13,7 +13,7 @@
 (defn- pad-segments [segments segments-size]
   (map #(format (str "%-" segments-size "s") %) segments))
 
-(defn- send-event [elapsed-time corr-id]
+(defn send-event [elapsed-time corr-id]
   (try
     (let [c (riemann/tcp-client {:host "127.0.0.1"})]
       (riemann/send-event c

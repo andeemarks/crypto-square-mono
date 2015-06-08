@@ -1,8 +1,11 @@
 (ns column-handler.test.handler
   (:use midje.sweet
         ring.mock.request
+        column-handler.models.core
         cheshire.core        
         column-handler.handler))
+
+(against-background [(send-event anything anything) => ..riemann..]
 
 (facts "About GETs"
   (fact "main route"
@@ -10,4 +13,4 @@
           body (parse-string (:body response))]
       (:status response) => 200
       (get body "column-text") => ["ac" "bd"]))
-  )
+  ))
