@@ -1,5 +1,7 @@
 # crypto-square
 
+[![Build Status](https://travis-ci.org/andeemarks/crypto-square.svg?branch=master)](https://travis-ci.org/andeemarks/crypto-square)
+
 A minimal Compojure web-app built for a presentation at [Yow West 2015][1], and providing a basic UI for the Crypto Square solution found [here][3].
 
 ![](https://github.com/andeemarks/column-handler/blob/master/resources/public/img/services.png)
@@ -18,7 +20,7 @@ To start a web server for the application, run:
 
 To test the app using [clj-webdriver][4] on port 5744, run:
 
-    lein test
+    lein midje
 
 Note: this assumes you have the [Chrome Driver][5] installed at ~/bin/chromedriver
 
