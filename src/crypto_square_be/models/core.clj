@@ -11,7 +11,6 @@
 (timer/deftimer processing-time)
  
 (defn- remove-spaces [text]
-  (prn text)
   (clj-str/replace text " " ""))
  
 (defn normalize-ciphertext [normalized-text segment-size]
@@ -19,18 +18,18 @@
     " " 
     (column-handler/split-into-columns normalized-text segment-size @correlation-id)))
 
-(defn- generate-ciphertext [normalized-text segment-size]
-  (remove-spaces 
-    (normalize-ciphertext normalized-text segment-size)))
+(defn- generate-ciphertext [text]
+  (let [normalized-text (normaliser/normalise-plaintext text @correlation-id)
+        segment-size (square-sizer/square-size normalized-text @correlation-id)]
+    (remove-spaces 
+      (normalize-ciphertext normalized-text segment-size))))
  
 (defn ciphertext [text & corr-id]
   (reset! correlation-id (first corr-id))
   (let [timer (timer/start processing-time)
-        normalized-text (normaliser/normalise-plaintext text @correlation-id)
-        segment-size (square-sizer/square-size normalized-text @correlation-id)
         result   (if (empty? text)
                     ""
-                    (generate-ciphertext normalized-text segment-size))
+                    (generate-ciphertext text))
         elapsed-time (timer/stop timer)]
       (riemann/send-event text elapsed-time @correlation-id)
       result))
