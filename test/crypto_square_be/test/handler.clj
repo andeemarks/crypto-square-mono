@@ -3,6 +3,7 @@
         ring.mock.request
         crypto-square-be.services.riemann
         crypto-square-be.services.normaliser
+        crypto-square-be.services.square-sizer
         cheshire.core
         crypto-square-be.handler))
 
@@ -27,9 +28,10 @@
   ; (fact "graceful handling of no input"
   ;   (ciphertext-for "") => "")
 
-  (fact "single word encryption"
+  (fact "single word encryption involves downstream services"
     (ciphertext-for "abcd") => "acbd"
-    (provided (normalise-plaintext "abcd" anything) => "abcd"))
+    (provided (normalise-plaintext "abcd" anything) => "abcd")
+    (provided (square-size "abcd" anything) => "2"))
 
   ; (fact "multi word encryption"
   ;   (ciphertext-for "ab+cd") => "acbd")
