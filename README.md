@@ -1,5 +1,7 @@
 # crypto-square-be
 
+[![Build Status](https://travis-ci.org/andeemarks/crypto-square-be.svg?branch=master)](https://travis-ci.org/andeemarks/crypto-square-be)
+
 A toy Compojure microservice built for a presentation at [Yow West 2015][1].
 
 This service is a top-level orchestrator of the Crypto Square solution found [here][3].
@@ -21,6 +23,12 @@ You will need [Leiningen][2] 1.7.0 or above installed.
 To start a web server for the application, run:
 
     ./up.sh
+
+## Tests
+
+To run the test suite:
+
+	lein midje
 
 ## License
 
