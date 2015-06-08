@@ -1,15 +1,13 @@
 (ns column-handler.test.handler
   (:use midje.sweet
         ring.mock.request
+        cheshire.core        
         column-handler.handler))
 
 (facts "About GETs"
   (fact "main route"
-    (let [response (app (request :get "/abcd/2"))]
-      (:status response) => 200))
-      ; (.contains (:body response) "Hello World") => truthy))
-
-  ; (fact "not-found route"
-  ;   (let [response (app (request :get "/invalid"))]
-  ;     (:status response) => 404))
+    (let [response (app (request :get "/abcd/2"))
+          body (parse-string (:body response))]
+      (:status response) => 200
+      (get body "column-text") => ["ac" "bd"]))
   )
