@@ -1,7 +1,7 @@
 (ns column-handler.test.handler
   (:use midje.sweet
         ring.mock.request
-        column-handler.models.core
+        column-handler.services.riemann
         cheshire.core        
         column-handler.handler))
 

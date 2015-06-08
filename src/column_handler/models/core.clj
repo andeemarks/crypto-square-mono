@@ -1,7 +1,6 @@
 (ns column-handler.models.core
   (:require [clojure.string :as clj-str]
-            [clojure.tools.logging :as log]
-            [riemann.client :as riemann]
+            [column-handler.services.riemann :as riemann]
             [metrics.timers :as timer]
             [cheshire.core :as json]))
 
@@ -12,15 +11,6 @@
  
 (defn- pad-segments [segments segments-size]
   (map #(format (str "%-" segments-size "s") %) segments))
-
-(defn send-event [elapsed-time corr-id]
-  (try
-    (let [c (riemann/tcp-client {:host "127.0.0.1"})]
-      (riemann/send-event c
-        {:service "column-handler" :metric (/ elapsed-time 1000000) :state "ok" :description corr-id})
-      (riemann/close-client c))
-    (catch java.io.IOException ex 
-      (log/warn "Cannot find Riemann!"))))
  
 (defn segments-in-columns [normalized-text segment-size]
   (let [segments (plaintext-segments normalized-text segment-size)]
@@ -32,5 +22,5 @@
   (let [timer (timer/start processing-time)
         result (segments-in-columns normalized-text (read-string segment-size))
         elapsed-time (timer/stop timer)]
-      (send-event elapsed-time corr-id)
+      (riemann/send-event elapsed-time corr-id)
       result))
