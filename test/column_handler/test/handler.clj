@@ -1,14 +1,15 @@
 (ns column-handler.test.handler
-  (:use clojure.test
+  (:use midje.sweet
         ring.mock.request
         column-handler.handler))
 
-(deftest test-app
-  (testing "main route"
-    (let [response (app (request :get "/"))]
-      (is (= (:status response) 200))
-      (is (.contains (:body response) "Hello World"))))
+(facts "About GETs"
+  (fact "main route"
+    (let [response (app (request :get "/abcd/2"))]
+      (:status response) => 200))
+      ; (.contains (:body response) "Hello World") => truthy))
 
-  (testing "not-found route"
-    (let [response (app (request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+  ; (fact "not-found route"
+  ;   (let [response (app (request :get "/invalid"))]
+  ;     (:status response) => 404))
+  )
