@@ -4,6 +4,7 @@
             [clojure.tools.logging :as log]
             [crypto-square-be.services.normaliser :as normaliser]
             [crypto-square-be.services.square-sizer :as square-sizer]
+            [crypto-square-be.services.column-handler :as column-handler]
             [riemann.client :as riemann]
             [metrics.timers :as timer]
             [ring.util.codec :refer [url-encode]]
@@ -13,19 +14,13 @@
 
 (timer/deftimer processing-time)
  
-(defn- column-handler-request [normalized-text segment-size]
-  (client/get 
-    (str "http://localhost:3003/" normalized-text "/" segment-size)
-    {:accept :json
-     :headers {"X-Correlation-Id" @correlation-id}}))
- 
 (defn- remove-spaces [text]
   (clj-str/replace text " " ""))
  
 (defn normalize-ciphertext [normalized-text segment-size]
   (clj-str/join 
     " " 
-    (let [response (column-handler-request normalized-text segment-size)
+    (let [response (column-handler/column-handler-request normalized-text segment-size @correlation-id)
           json-body (json/parse-string (:body response))]
       (get json-body "column-text"))))
 
