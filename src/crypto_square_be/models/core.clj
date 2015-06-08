@@ -4,22 +4,20 @@
             [crypto-square-be.services.square-sizer :as square-sizer]
             [crypto-square-be.services.column-handler :as column-handler]
             [crypto-square-be.services.riemann :as riemann]
-            [metrics.timers :as timer]
-            [cheshire.core :as json]))
+            [metrics.timers :as timer]))
 
 (def ^:private correlation-id (atom nil))
 
 (timer/deftimer processing-time)
  
 (defn- remove-spaces [text]
+  (prn text)
   (clj-str/replace text " " ""))
  
 (defn normalize-ciphertext [normalized-text segment-size]
   (clj-str/join 
     " " 
-    (let [response (column-handler/column-handler-request normalized-text segment-size @correlation-id)
-          json-body (json/parse-string (:body response))]
-      (get json-body "column-text"))))
+    (column-handler/split-into-columns normalized-text segment-size @correlation-id)))
 
 (defn- generate-ciphertext [normalized-text segment-size]
   (remove-spaces 

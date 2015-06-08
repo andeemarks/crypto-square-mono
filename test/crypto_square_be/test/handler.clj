@@ -4,6 +4,7 @@
         crypto-square-be.services.riemann
         crypto-square-be.services.normaliser
         crypto-square-be.services.square-sizer
+        crypto-square-be.services.column-handler
         cheshire.core
         crypto-square-be.handler))
 
@@ -31,7 +32,8 @@
   (fact "single word encryption involves downstream services"
     (ciphertext-for "abcd") => "acbd"
     (provided (normalise-plaintext "abcd" anything) => "abcd")
-    (provided (square-size "abcd" anything) => "2"))
+    (provided (square-size "abcd" anything) => "2")
+    (provided (split-into-columns "abcd" "2" anything) => ["ac" "bd"]))
 
   ; (fact "multi word encryption"
   ;   (ciphertext-for "ab+cd") => "acbd")
