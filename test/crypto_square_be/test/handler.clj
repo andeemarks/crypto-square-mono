@@ -10,25 +10,26 @@
     (request :get 
       (str "/" plaintext))))
 
+(defn- ciphertext-for [plaintext]
+  (get 
+    (parse-string 
+      (:body 
+        (encrypt plaintext))) 
+    "ciphertext"))
+
 (against-background [(send-event anything anything anything) => ..riemann..]
 
 (facts "About GETs"
+  (fact "returns 200"
+    (:status (encrypt "")) => 200)
+
   (fact "graceful handling of no input"
-    (let [response (encrypt "")
-          body (parse-string (:body response))]
-      (:status response) => 200
-      (get body "ciphertext") => ""))
+    (ciphertext-for "") => "")
 
   (fact "single word encryption"
-    (let [response (encrypt "abcd")
-          body (parse-string (:body response))]
-      (:status response) => 200
-      (get body "ciphertext") => "acbd"))
+    (ciphertext-for "abcd") => "acbd")
 
   (fact "multi word encryption"
-    (let [response (encrypt "ab+cd")
-          body (parse-string (:body response))]
-      (:status response) => 200
-      (get body "ciphertext") => "acbd"))
-  )
-)
+    (ciphertext-for "ab+cd") => "acbd")
+  
+))
