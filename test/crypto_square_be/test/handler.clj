@@ -1,6 +1,7 @@
 (ns crypto-square-be.test.handler
   (:use midje.sweet
         ring.mock.request
+        crypto-square-be.services.riemann
         cheshire.core
         crypto-square-be.handler))
 
@@ -8,6 +9,8 @@
   (app 
     (request :get 
       (str "/" plaintext))))
+
+(against-background [(send-event anything anything anything) => ..riemann..]
 
 (facts "About GETs"
   (fact "graceful handling of no input"
@@ -28,3 +31,4 @@
       (:status response) => 200
       (get body "ciphertext") => "acbd"))
   )
+)
