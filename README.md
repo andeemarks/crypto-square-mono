@@ -28,7 +28,7 @@ To start a web server for the application, run:
 
 To run the test suite:
 
-	lein test
+	lein midje
 	
 ## License
 
