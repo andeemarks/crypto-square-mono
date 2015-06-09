@@ -18,7 +18,7 @@ To start a web server for the application, run:
 
 ## Browser Tests
 
-To test the app using [clj-webdriver][4] on port 5744, run:
+To test the app using [clj-webdriver][4] on port 4000, run:
 
     lein midje
 

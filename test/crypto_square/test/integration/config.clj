@@ -1,4 +1,4 @@
-(ns crypto-square.test.config
+(ns crypto-square.test.integration.config
   (:require [ring.adapter.jetty :refer [run-jetty]]
             [clj-webdriver.taxi :refer :all]
             [crypto-square.routes.home :refer [home-routes]]))
