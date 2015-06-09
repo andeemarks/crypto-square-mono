@@ -9,6 +9,7 @@
                  [org.clojure/tools.logging "0.3.1"]
                  [metrics-clojure "2.5.1"]
                  [ring/ring-json "0.3.1"]
+                 [environ "1.0.0"]
                  [ring-server "0.3.1"]]
   :plugins [[lein-ring "0.8.12"]]
   :ring {:handler square-sizer.handler/app
