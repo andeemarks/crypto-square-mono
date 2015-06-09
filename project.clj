@@ -28,5 +28,7 @@
       [clj-webdriver "0.6.1" :exclusions [org.seleniumhq.selenium/selenium-server]]
       [org.seleniumhq.selenium/selenium-server "2.45.0"]      
       [ring-mock "0.1.5"] 
+      [midje "1.6.3"]
       [ring/ring-jetty-adapter "1.3.2"]
-      [ring/ring-devel "1.3.1"]]}})
+      [ring/ring-devel "1.3.1"]]
+    :plugins [[lein-midje "3.0.0"]]}})

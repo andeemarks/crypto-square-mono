@@ -26,6 +26,7 @@
 (defn browser-up
   "Start up a browser if it's not already started."
   []
+  (System/setProperty "webdriver.chrome.driver" (str (System/getenv "HOME") "/bin/chromedriver"))
   (when (= 1 (swap! browser-count inc))
     (set-driver! {:browser :chrome})
     (implicit-wait 6000)))
@@ -35,9 +36,3 @@
   [& {:keys [force] :or {force false}}]
   (when (zero? (swap! browser-count (if force (constantly 0) dec)))
     (quit)))
-
-(defn with-browser [t]
-  (System/setProperty "webdriver.chrome.driver" (str (System/getenv "HOME") "/bin/chromedriver"))
-  (browser-up)
-  (t)
-  (browser-down))
