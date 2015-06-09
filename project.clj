@@ -14,6 +14,7 @@
   :ring {:handler square-sizer.handler/app
          :init square-sizer.handler/init
          :destroy square-sizer.handler/destroy}
+  :min-lein-version "2.0.0"         
   :profiles
   {:uberjar {:aot :all}
    :production

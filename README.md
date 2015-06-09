@@ -18,7 +18,7 @@ You will need [Leiningen][2] 1.7.0 or above installed.
 
 ## Running
 
-To start a web server for the application, run:
+To start a web server for the application locally, run:
 
     ./up.sh
 
@@ -27,6 +27,10 @@ To start a web server for the application, run:
 To run the test suite:
 
 	lein midje
+
+To manually test a hosted version, try:
+
+    curl https://calm-sierra-1958.herokuapp.com/abcd
 
 ## License
 
