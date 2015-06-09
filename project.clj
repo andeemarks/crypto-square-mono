@@ -13,6 +13,7 @@
   :ring {:handler normaliser.handler/app
          :init normaliser.handler/init
          :destroy normaliser.handler/destroy}
+  :min-lein-version "2.0.0"         
   :profiles
   {:uberjar {:aot :all}
    :production
