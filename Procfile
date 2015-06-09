@@ -1,1 +1,1 @@
-web: ./up.sh
+web: lein ring server-headless
