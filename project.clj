@@ -12,6 +12,7 @@
   :ring {:handler column-handler.handler/app
          :init column-handler.handler/init
          :destroy column-handler.handler/destroy}
+  :min-lein-version "2.0.0"         
   :profiles
   {:uberjar {:aot :all}
    :production
