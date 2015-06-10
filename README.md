@@ -30,7 +30,7 @@ To run the test suite:
 
 To manually test a hosted version, try:
 
-    curl https://calm-sierra-1958.herokuapp.com/abcd
+    curl https://cs-square-sizer.herokuapp.com/abcd
 
 ## License
 
