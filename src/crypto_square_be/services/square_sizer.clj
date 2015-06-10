@@ -1,10 +1,11 @@
 (ns crypto-square-be.services.square-sizer
   (:require [clj-http.client :as client]
+	  	    [environ.core :refer [env]]
             [cheshire.core :as json]))
  
 (defn- square-size-request [plaintext corr-id]
   (client/get 
-    (str "http://localhost:3001/" plaintext)
+    (str (env :square-sizer-url) "/" plaintext)
     {:accept :json
      :headers {"X-Correlation-Id" corr-id}}))
  

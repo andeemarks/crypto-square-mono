@@ -1,6 +1,7 @@
 (ns crypto-square-be.services.normaliser
   (:require [clj-http.client :as client]
             [metrics.timers :as timer]
+            [environ.core :refer [env]]
             [ring.util.codec :refer [url-encode]]
             [cheshire.core :as json]))
 
@@ -8,7 +9,7 @@
 
 (defn- normalise-request [plaintext corr-id]
   (client/get 
-    (str "http://localhost:3002/" (url-encode plaintext))
+    (str (env :normaliser-url) "/" (url-encode plaintext))
     {:accept :json
      :headers {"X-Correlation-Id" corr-id}}))
  

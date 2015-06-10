@@ -13,3 +13,5 @@ pom.xml
 *.sublime-project
 
 *.sublime-workspace
+
+.lein-repl-history
