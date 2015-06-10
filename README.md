@@ -32,7 +32,7 @@ To run the test suite:
 
 To manually test a hosted version, try:
 
-    curl https://nameless-temple-7536.herokuapp.com/abcd
+    curl https://cs-normaliser.herokuapp.com/abcd
 	
 ## License
 
