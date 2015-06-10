@@ -13,4 +13,4 @@
   		plaintext 
   		segment-size 
   		(get-in request [:headers "x-correlation-id"])))
-  (GET  "/" [] (home "" "")))
+  (GET  "/" [] (home "" "" "")))

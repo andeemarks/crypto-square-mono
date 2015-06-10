@@ -32,7 +32,7 @@ To run the test suite:
 
 To manually test a hosted version, try:
 
-    curl https://boiling-scrubland-2423.herokuapp.com/abcd/2
+    curl https://cs-column-handler.herokuapp.com/abcd/2
 
 ## License
 
