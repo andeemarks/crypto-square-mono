@@ -12,7 +12,7 @@
 (defn ciphertext [plaintext]
 	(let [timer (timer/start processing-time)
 				correlation-id (corr-id) 
-				ciphertext (be/encrypt plaintext corr-id)
+				ciphertext (be/encrypt plaintext correlation-id)
 				elapsed-time (timer/stop timer)]
 		(riemann/send-event ciphertext correlation-id elapsed-time)
 		ciphertext))
