@@ -17,24 +17,23 @@
 (defn- show-form [plaintext ciphertext]
   (common 
   	[:body 
-      [:div.panel.panel-default
-        [:div.panel-body
-    			(form-to {:class "dark-matter"} [:post "/encrypt"] 
-            [:div.panel-heading "Plaintext"]
-    		    (text-field {:size 40 } :plaintext plaintext)
-            [:div.panel-heading "Ciphertext"]
-            (text-field {:id "ciphertext"} :ciphertext ciphertext)
-            [:div.panel-heading  (submit-button {:id "encrypt" :class "button"} "Encryptionise!")])]]]))
+      [:div.alert.alert-info "Enter your plaintext and click Encryptionise to see the ciphertext"]
+			(form-to {:class "form-horizontal"} [:post "/encrypt"] 
+        [:div.form-group
+          [:label.col-sm-2.control-label {:for "plaintext"} "Plaintext"]
+          [:div.col-sm-10
+            (text-field {:size 40 } :plaintext plaintext)]]
+        [:div.form-group
+          [:label.col-sm-2.control-label {:for "ciphertext"} "Ciphertext"]
+          [:div.col-sm-10
+  		      (text-field {:size 40 } :plaintext ciphertext)]]
+        [:div.form-group
+          [:div.col-sm-offset-2.col-sm-10 (submit-button {:id "encrypt" :class "btn btn-primary"} "Encryptionise!")]]
+        )
+      ]
+    )
+  )
 
 (defn input-form 
   ([]                      (show-form "" ""))
   ([plaintext ciphertext]  (show-form plaintext ciphertext)))
-
-; <div class="panel panel-default">
-;   <div class="panel-heading">
-;     <h3 class="panel-title">Panel title</h3>
-;   </div>
-;   <div class="panel-body">
-;     Panel content
-;   </div>
-; </div>
