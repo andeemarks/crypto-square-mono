@@ -6,7 +6,6 @@
             [metrics.ring.expose :refer [expose-metrics-as-json]]
             [metrics.ring.instrument :refer [instrument]]
             [hiccup.middleware :refer [wrap-base-url]]
-            [hiccup.bootstrap.middleware :refer [wrap-bootstrap-resources]]
             [compojure.handler :as handler]
             [compojure.route :as route]
             [crypto-square.routes.home :refer [home-routes]]))
@@ -25,7 +24,6 @@
   (-> (routes home-routes app-routes)
       (handler/site)
       (wrap-with-logger)
-      (wrap-bootstrap-resources)
       (wrap-base-url)
       ; (instrument)
       ))
