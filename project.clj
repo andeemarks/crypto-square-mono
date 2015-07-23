@@ -10,6 +10,7 @@
                  [metrics-clojure "2.5.1"]
                  [environ "1.0.0"]
                  [metrics-clojure-ring "2.0.0"]
+                 [com.soundcloud/prometheus-clj "1.0.6"]
                  [riemann-clojure-client "0.2.11"]
                  [ring-server "0.3.1"]]
   :plugins [[lein-ring "0.8.12"]]
