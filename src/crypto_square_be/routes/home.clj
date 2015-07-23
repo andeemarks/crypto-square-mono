@@ -2,6 +2,7 @@
   (:require 
   	[compojure.core :refer :all]
     [clojure.tools.logging :as log]
+    [prometheus.core :as prometheus]
  		[crypto-square-be.views.layout :as layout]
   	[crypto-square-be.models.core :as model]))
 
@@ -15,5 +16,6 @@
   		(get-in request [:body "plaintext"]) 
   		(get-in request [:headers "x-correlation-id"])))
   (GET  "/:plaintext" [plaintext] (home plaintext nil))
+  (GET "/metrics"  request (prometheus/metrics request))
   (GET  "/" request (home "" nil))
   )
