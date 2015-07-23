@@ -5,7 +5,7 @@
     [riemann.client :as riemann]))
 
 (defn- state [] 
-  (if (= 1 (rand-int 20))
+  (if (= 1 (rand-int 10))
     "failure"
     "ok"))
 

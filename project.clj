@@ -9,6 +9,7 @@
                  [org.clojure/tools.logging "0.3.1"]
                  [metrics-clojure "2.5.1"]
                  [ring/ring-json "0.3.1"]
+                 [com.soundcloud/prometheus-clj "1.0.6"]
                  [environ "1.0.0"]
                  [ring-server "0.3.1"]]
   :plugins [[lein-ring "0.8.12"]]
