@@ -15,7 +15,7 @@
   	(home 
   		(get-in request [:body "plaintext"]) 
   		(get-in request [:headers "x-correlation-id"])))
-  (GET  "/:plaintext" [plaintext] (home plaintext nil))
   (GET "/metrics"  request (prometheus/metrics request))
+  (GET  "/:plaintext" [plaintext] (home plaintext nil))
   (GET  "/" request (home "" nil))
   )
