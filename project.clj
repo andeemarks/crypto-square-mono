@@ -1,19 +1,19 @@
 (defproject crypto-square "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [compojure "1.1.6"]
+  :dependencies [[org.clojure/clojure "1.7.0"]
+                 [compojure "1.4.0"]
                  [hiccup "1.0.5"]
-                 [clj-http "1.1.2"]
+                 [clj-http "2.0.0"]
                  [ring.middleware.logger "0.5.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [metrics-clojure "2.5.1"]
                  [environ "1.0.0"]
-                 [metrics-clojure-ring "2.0.0"]
+                 [metrics-clojure-ring "2.5.1"]
                  [com.soundcloud/prometheus-clj "1.0.6"]
-                 [riemann-clojure-client "0.2.11"]
-                 [ring-server "0.3.1"]]
-  :plugins [[lein-ring "0.8.12"]]
+                 [riemann-clojure-client "0.4.1"]
+                 [ring-server "0.4.0"]]
+  :plugins [[lein-ring "0.9.6"]]
   :ring {:handler crypto-square.handler/app
          :init crypto-square.handler/init
          :destroy crypto-square.handler/destroy}
@@ -28,9 +28,9 @@
    :dev
    {:dependencies [
       [clj-webdriver "0.6.1" :exclusions [org.seleniumhq.selenium/selenium-server]]
-      [org.seleniumhq.selenium/selenium-server "2.45.0"]      
+      [org.seleniumhq.selenium/selenium-server "2.46.0"]      
       [ring-mock "0.1.5"] 
-      [midje "1.6.3"]
-      [ring/ring-jetty-adapter "1.3.2"]
-      [ring/ring-devel "1.3.1"]]
-    :plugins [[lein-midje "3.0.0"]]}})
+      [midje "1.7.0"]
+      [ring/ring-jetty-adapter "1.4.0"]
+      [ring/ring-devel "1.4.0"]]
+    :plugins [[lein-midje "3.1.3"]]}})
