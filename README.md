@@ -8,7 +8,7 @@ A minimal Compojure web-app built for a presentation at [Yow West 2015][1], and 
 
 ## Prerequisites
 
-You will need [Leiningen][2] 1.7.0 or above installed.
+Currently building on [Leiningen][2] 2.5.1
 
 ## Running
 
