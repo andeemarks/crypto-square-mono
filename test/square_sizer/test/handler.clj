@@ -1,11 +1,13 @@
 (ns square-sizer.test.handler
+  (:require [prometheus.core :as prometheus])
   (:use midje.sweet
         square-sizer.services.riemann
         ring.mock.request
         cheshire.core        
         square-sizer.handler))
 
-(against-background [(send-event anything anything) => ..riemann..]
+(against-background [(before :facts (prometheus/init! "square-sizer"))
+                      (send-event anything anything) => ..riemann..]
 
 (facts "about GETs"
   (fact "handles empty input gracefully"
