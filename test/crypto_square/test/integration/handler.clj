@@ -22,12 +22,9 @@
   (with-state-changes [(before :facts (browser-up))
                        (after  :facts (browser-down))]
 
-    (fact "Encryption works!"
-      (test-encryption-happy-path))
-
-    ; (fact "Synthetic transaction generator"
-    ;   (forever 
-    ;     (test-encryption-happy-path)
-    ;     (Thread/sleep 5000)))
+    (fact "Synthetic transaction generator"
+      (forever 
+        (test-encryption-happy-path)
+        (Thread/sleep 5000)))
 
 ))
