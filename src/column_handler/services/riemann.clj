@@ -7,7 +7,6 @@
   (try
     (let [c (riemann/tcp-client {:host (env :riemann-url)})]
       (riemann/send-event c
-        {:service "column-handler" :metric (/ elapsed-time 1000000) :state "ok" :description corr-id})
-      (riemann/close-client c))
+        {:service "column-handler" :metric (/ elapsed-time 1000000) :state "ok" :description corr-id}))
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
