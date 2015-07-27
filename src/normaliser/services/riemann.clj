@@ -14,7 +14,6 @@
   (try
     (let [c (riemann/tcp-client {:host (env :riemann-url)})]
       (riemann/send-event c
-      	{:service "normaliser" :metric (/ elapsed-time 1000000) :state (state) :description corr-id})
-      (riemann/close-client c))
+      	{:service "normaliser" :metric (/ elapsed-time 1000000) :state (state) :description corr-id}))
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
