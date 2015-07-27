@@ -19,7 +19,6 @@
                   {:service "square-sizer" 
                    :metric (metric elapsed-time) 
                    :state (state) 
-                   :description corr-id})
-          (riemann/close-client c))
+                   :description corr-id}))
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
