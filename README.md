@@ -14,7 +14,7 @@ This service is a top-level orchestrator of the Crypto Square solution found [he
 
 ## Prerequisites
 
-You will need [Leiningen][2] 1.7.0 or above installed.
+Currently building on [Leiningen][2] 2.5.1
 
 [2]: https://github.com/technomancy/leiningen
 

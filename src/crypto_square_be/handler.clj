@@ -24,8 +24,8 @@
 (def app
   (-> (routes home-routes app-routes)
       (handler/site)
+      (prometheus/instrument-handler)
       (wrap-with-logger)
       (wrap-json-body)
-      (prometheus/instrument-handler)
-      (handle-correlation-ids)
+      ; (handle-correlation-ids)
       (wrap-json-response)))
