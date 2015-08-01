@@ -8,10 +8,12 @@
                  [ring.middleware.logger "0.5.0"]
                  [org.clojure/tools.logging "0.3.1"]
                  [metrics-clojure "2.5.1"]
-                 [environ "1.0.0"]
                  [metrics-clojure-ring "2.5.1"]
+                 [metrics-clojure-health "2.5.1"]
+                 [environ "1.0.0"]
                  [com.soundcloud/prometheus-clj "1.0.6"]
                  [riemann-clojure-client "0.4.1"]
+                 [ring/ring-json "0.4.0"]
                  [ring-server "0.4.0"]]
   :plugins [[lein-ring "0.9.6"]]
   :ring {:handler crypto-square.handler/app

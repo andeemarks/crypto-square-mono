@@ -1,8 +1,0 @@
-(def n {"ciphertext" "acbd"})
-(get-in n "ciphertext")
-(get n "ciphertext")
-(System/setProperty "webdriver.chrome.driver" (str (System/getenv "HOME") "~/bin/chromedriver"))
-(use 'clj-webdriver.taxi)
-(set-driver! {:browser :chrome} "https://github.com/plexus/chestnut")
-(System/setProperty "webdriver.chrome.driver" (str (System/getenv "HOME") "/bin/chromedriver"))
-(set-driver! {:browser :chrome} "https://github.com/plexus/chestnut")
