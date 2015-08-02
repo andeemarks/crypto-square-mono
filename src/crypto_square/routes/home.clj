@@ -15,16 +15,14 @@
 				ciphertext (model/ciphertext plaintext)]
 	  (layout/input-form plaintext ciphertext)))
 
-(health/defhealthcheck "backend-available?" (fn [] (let [status (be/available?)]
-                                         (if (== status 200)
+(health/defhealthcheck "backend-available?" (fn [] (if (== (be/available?) 200)
                                             (health/healthy "backend is available!")
-                                            (health/unhealthy "backend is unavailable!")))))
+                                            (health/unhealthy "backend is unavailable!"))))
 
 
-(health/defhealthcheck "riemann-available?" (fn [] (let [status (riemann/available?)]
-                                         (if (not status)
+(health/defhealthcheck "riemann-available?" (fn [] (if (not (riemann/available?))
                                             (health/unhealthy "riemann is unavailable!")
-                                            (health/healthy "riemann is available!")))))
+                                            (health/healthy "riemann is available!"))))
 
 (defn health-check []
 	(let [results (health/check riemann-available?)]
