@@ -4,6 +4,13 @@
     [environ.core :refer [env]]
   	[clojure.tools.logging :as log]))
 
+(defn available? []
+	(try
+		(let [c (riemann/tcp-client {:host (env :riemann-host)})]
+			(riemann/connected? c))
+		(catch java.io.IOException ex 
+			false)))
+
 (defn send-event [plaintext corr-id elapsed-time]
 	(try
 		(let [c (riemann/tcp-client {:host (env :riemann-host)})]
