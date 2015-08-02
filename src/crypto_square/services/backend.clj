@@ -12,6 +12,10 @@
 		 :headers {"X-Correlation-Id" corr-id}
 		 :accept :json}))
 
+(defn available? []
+  (try ((client/get (env :backend-url) {:throw-exceptions false}):status)
+  (catch Exception e -1)))
+
 (defn encrypt [plaintext corr-id]
 	(get 
 		(json/parse-string 

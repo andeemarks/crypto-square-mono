@@ -3,9 +3,7 @@
   					[metrics.health.core :as health]
             [crypto-square.views.layout :as layout]
             [prometheus.core :as prometheus]
-            [clojure.reflect :as r]
-            [clj-http.client :as client]
-            [environ.core :refer [env]]
+            [crypto-square.services.backend :as be]
             [crypto-square.models.core :as model]))
 
 (defn home []
@@ -16,17 +14,13 @@
 				ciphertext (model/ciphertext plaintext)]
 	  (layout/input-form plaintext ciphertext)))
 
-(defn http-get [address]
-  (try ((client/get address {:throw-exceptions false}):status)
-  (catch Exception e -1)))
-
-(health/defhealthcheck "healthy" (fn [] (let [status (http-get (env :backend-url))]
+(health/defhealthcheck "backend-available?" (fn [] (let [status (be/available?)]
                                          (if (== status 200)
-                                            (health/healthy "%s is available!" (env :backend-url))
-                                            (health/unhealthy "%s is unavailable!" (env :backend-url))))))
+                                            (health/healthy "backend is available!")
+                                            (health/unhealthy "backend is unavailable!")))))
 
 (defn health-check []
-	(let [results (health/check healthy)]
+	(let [results (health/check backend-available?)]
 		{:body {:healthy? (.isHealthy results) :message (.getMessage results)}}))
 
 (defroutes home-routes
