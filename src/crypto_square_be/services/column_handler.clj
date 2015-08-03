@@ -4,9 +4,11 @@
             [metrics.health.core :as health]
             [cheshire.core :as json]))
 
+(defn- healthcheck-page []
+  (str (env :column-handler-url) "/health"))
 
 (defn available? []
-  (try ((client/get (env :column-handler-url) {:throw-exceptions false}):status)
+  (try ((client/get (healthcheck-page) {:throw-exceptions false}):status)
   (catch Exception e -1)))
 
 (health/defhealthcheck "column-handler-available?" (fn [] (if (== (available?) 200)
