@@ -8,6 +8,7 @@
                  [ring.middleware.logger "0.5.0"]
                  [environ "1.0.0"]
                  [metrics-clojure "2.5.1"]
+                 [metrics-clojure-health "2.5.1"]
                  [ring/ring-json "0.3.1"]
                  [ring-server "0.4.0"]]
   :plugins [[lein-ring "0.9.6"]]
