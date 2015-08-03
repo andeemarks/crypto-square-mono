@@ -13,8 +13,11 @@
 		 :headers {"X-Correlation-Id" corr-id}
 		 :accept :json}))
 
+(defn- healthcheck-page []
+  (str (env :backend-url) "/health"))
+
 (defn available? []
-  (try ((client/get (env :backend-url) {:throw-exceptions false}):status)
+  (try ((client/get (healthcheck-page) {:throw-exceptions false}):status)
   (catch Exception e -1)))
 
 (health/defhealthcheck "backend-available?" (fn [] (if (== (available?) 200)
