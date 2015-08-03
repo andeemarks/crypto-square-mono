@@ -14,6 +14,9 @@
 	[plaintext corr-id]
   (layout/json-response {:ciphertext (model/ciphertext plaintext corr-id)} corr-id))
 
+(defn- any-services-unhealthy? [services-health]
+  (not (some #(false? (:healthy? %1)) (vals services-health))))
+
 (defn health-check []
   (let [services-health 
     {:riemann (riemann/healthcheck) 
@@ -21,7 +24,7 @@
       :square-sizer (square-sizer/healthcheck) 
       :normaliser (normaliser/healthcheck)}]
     {:body 
-      {:healthy? (not (some #(false? (:healthy? %1)) (vals services-health)))
+      {:healthy? (any-services-unhealthy? services-health)
         :services services-health}}))
 
 (defroutes home-routes
