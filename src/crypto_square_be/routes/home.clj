@@ -15,13 +15,13 @@
   (layout/json-response {:ciphertext (model/ciphertext plaintext corr-id)} corr-id))
 
 (defn health-check []
-  (let [normaliser-health (normaliser/healthcheck)
-        column-handler-health (column-handler/healthcheck)
-        square-sizer-health (square-sizer/healthcheck)
-        riemann-health (riemann/healthcheck)
-        services-health {:riemann riemann-health :column-handler column-handler-health :square-sizer square-sizer-health :normaliser normaliser-health}]
+  (let [services-health 
+    {:riemann (riemann/healthcheck) 
+      :column-handler (column-handler/healthcheck) 
+      :square-sizer (square-sizer/healthcheck) 
+      :normaliser (normaliser/healthcheck)}]
     {:body 
-      {:healthy? (and (:healthy? normaliser-health) (:healthy? riemann-health) (:healthy? column-handler-health) (:healthy? square-sizer-health)) 
+      {:healthy? (not (some #(false? (:healthy? %1)) (vals services-health)))
         :services services-health}}))
 
 (defroutes home-routes
