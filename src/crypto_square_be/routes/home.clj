@@ -18,14 +18,11 @@
   (let [normaliser-health (normaliser/healthcheck)
         column-handler-health (column-handler/healthcheck)
         square-sizer-health (square-sizer/healthcheck)
-        riemann-health (riemann/healthcheck)]
+        riemann-health (riemann/healthcheck)
+        services-health {:riemann riemann-health :column-handler column-handler-health :square-sizer square-sizer-health :normaliser normaliser-health}]
     {:body 
       {:healthy? (and (:healthy? normaliser-health) (:healthy? riemann-health) (:healthy? column-handler-health) (:healthy? square-sizer-health)) 
-        :services {
-          :riemann riemann-health 
-          :column-handler column-handler-health
-          :square-sizer square-sizer-health
-          :normaliser normaliser-health}}}))
+        :services services-health}}))
 
 (defroutes home-routes
   (POST "/" request 
