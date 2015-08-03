@@ -16,10 +16,9 @@
         :riemann riemann-health}}}))
 
 (defroutes home-routes
-  (GET  "/health"  request (health-check))
   (GET  "/:plaintext/:segment-size" [plaintext segment-size :as request] 
   	(home 
   		plaintext 
   		segment-size 
   		(get-in request [:headers "x-correlation-id"])))
-  (GET  "/" [] (home "" "" "")))
+  (GET  "/health"  request (health-check)))
