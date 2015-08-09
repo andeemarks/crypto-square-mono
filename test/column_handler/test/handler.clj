@@ -1,11 +1,15 @@
 (ns column-handler.test.handler
+  (:require [column-handler.services.riemann :as riemann])
   (:use midje.sweet
         ring.mock.request
-        column-handler.services.riemann
         cheshire.core        
         column-handler.handler))
 
-(against-background [(send-event anything anything) => ..riemann..]
+  (fact "riemann failures are not fatal"
+    (:status (app (request :get "/riemann-failure/2"))) => 200
+    (provided (riemann/connection) =throws=> (IllegalArgumentException.)))
+
+(against-background [(riemann/send-event anything anything) => ..riemann..]
 
   (facts "About main GET route"
     (fact "happy responses are 200s"

@@ -4,9 +4,12 @@
             [metrics.health.core :as health]
             [riemann.client :as riemann]))
 
+(defn connection []
+  (riemann/tcp-client {:host (env :riemann-host)}))
+
 (defn available? []
   (try
-    (let [c (riemann/tcp-client {:host (env :riemann-host)})]
+    (let [c (connection)]
       (riemann/connected? c))
     (catch java.io.IOException ex 
       false)))
@@ -21,8 +24,10 @@
 
 (defn send-event [elapsed-time corr-id]
   (try
-    (let [c (riemann/tcp-client {:host (env :riemann-host)})]
+    (let [c (connection)]
       (riemann/send-event c
         {:service "column-handler" :metric (/ elapsed-time 1000000) :state "ok" :description corr-id}))
+    (catch java.lang.IllegalArgumentException ex 
+      (log/warn "Cannot find Riemann!"))
     (catch java.io.IOException ex 
       (log/warn "Cannot find Riemann!"))))
