@@ -19,8 +19,12 @@
            (pad-segments segments segment-size))))
  
 (defn columnise [normalized-text segment-size corr-id]
-  (let [timer (timer/start processing-time)
-        result (segments-in-columns normalized-text (read-string segment-size))
-        elapsed-time (timer/stop timer)]
-      (riemann/send-event elapsed-time corr-id)
-      result))
+  (cond 
+    (re-matches (re-pattern "\\d+") segment-size)
+      (let [timer (timer/start processing-time)
+            result (segments-in-columns normalized-text (read-string segment-size))
+            elapsed-time (timer/stop timer)]
+          (riemann/send-event elapsed-time corr-id)
+          result)
+    :else
+      (throw (IllegalArgumentException. "segment-size is not a number"))))

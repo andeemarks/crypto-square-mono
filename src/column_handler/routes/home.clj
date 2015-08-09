@@ -6,7 +6,11 @@
 
 
 (defn home [plaintext segment-size corr-id]
-  (layout/json-response {:column-text (model/columnise plaintext segment-size corr-id)}))
+  (try
+    (layout/json-response {:column-text (model/columnise plaintext segment-size corr-id)})
+    (catch IllegalArgumentException e
+      {:status  400
+       :headers {"Content-Type" "application/json; charset=utf-8"}})))
 
 (defn health-check []
   (let [riemann-health (riemann/healthcheck)]
