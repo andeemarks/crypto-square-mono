@@ -27,4 +27,4 @@
           (riemann/send-event elapsed-time corr-id)
           result)
     :else
-      (throw (IllegalArgumentException. "segment-size is not a number"))))
+      (throw (IllegalArgumentException. (str "The segment-size value '" segment-size "' is not a number")))))
