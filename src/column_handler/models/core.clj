@@ -6,25 +6,28 @@
 
 (timer/deftimer processing-time)
 
-(defn plaintext-segments [normalized-text segment-size]
+(defn- plaintext-segments [normalized-text segment-size]
     (map clj-str/join (partition-all segment-size normalized-text)))
  
 (defn- pad-segments [segments segments-size]
   (map #(format (str "%-" segments-size "s") %) segments))
  
-(defn segments-in-columns [normalized-text segment-size]
+(defn- segments-in-columns [normalized-text segment-size]
   (let [segments (plaintext-segments normalized-text segment-size)]
     (apply map
            #(clj-str/trim (apply str %&))
            (pad-segments segments segment-size))))
  
+(defn- valid-segment-size? [segment-size]
+  (re-matches (re-pattern "\\d+") segment-size))
+
 (defn columnise [normalized-text segment-size corr-id]
   (cond 
-    (re-matches (re-pattern "\\d+") segment-size)
+    (valid-segment-size? segment-size)
       (let [timer (timer/start processing-time)
             result (segments-in-columns normalized-text (read-string segment-size))
             elapsed-time (timer/stop timer)]
-          (riemann/send-event elapsed-time corr-id)
-          result)
+        (riemann/send-event elapsed-time corr-id)
+        result)
     :else
       (throw (IllegalArgumentException. (str "The segment-size value '" segment-size "' is not a number")))))
