@@ -10,6 +10,7 @@
     (layout/json-response {:column-text (model/columnise plaintext segment-size corr-id)})
     (catch IllegalArgumentException e
       {:status  400
+       :body {:error (.getMessage e)}
        :headers {"Content-Type" "application/json; charset=utf-8"}})))
 
 (defn health-check []
