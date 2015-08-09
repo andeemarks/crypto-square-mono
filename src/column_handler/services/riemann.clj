@@ -11,7 +11,7 @@
   (try
     (let [c (connection)]
       (riemann/connected? c))
-    (catch java.io.IOException ex 
+    (catch Exception ex 
       false)))
 
 (health/defhealthcheck "riemann-available?" (fn [] (if (not (available?))
@@ -19,8 +19,9 @@
                                             (health/healthy "riemann is available!"))))
 
 (defn healthcheck []
-  (let [health (health/check riemann-available?)]
-    {:healthy? (.isHealthy health) :message (.getMessage health)}))
+  (try
+    (let [health (health/check riemann-available?)]
+      {:healthy? (.isHealthy health) :message (.getMessage health)})))
 
 (defn send-event [elapsed-time corr-id]
   (try
