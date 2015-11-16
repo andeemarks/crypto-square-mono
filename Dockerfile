@@ -1,6 +1,6 @@
 FROM clojure
 
-ENV workdir /usr/src/app
+ENV workdir=/usr/src/app PORT=3008
 
 RUN mkdir -p ${workdir}
 
@@ -12,6 +12,6 @@ RUN lein deps
 
 COPY . ${workdir}
 
-EXPOSE 3002
+EXPOSE ${PORT}
 
 ENTRYPOINT ["/usr/src/app/up.sh"]
