@@ -3,6 +3,7 @@
             [metrics.timers :as timer]
             [metrics.health.core :as health]
             [environ.core :refer [env]]
+            [clojure.tools.logging :as log]
             [ring.util.codec :refer [url-encode]]
             [cheshire.core :as json]))
 
@@ -24,6 +25,7 @@
     {:healthy? (.isHealthy health) :message (.getMessage health)}))
 
 (defn- normalise-request [plaintext corr-id]
+  (log/info (str "Attempting to normalise request via: " (env :normaliser-url)))
   (client/get 
     (str (env :normaliser-url) "/" (url-encode plaintext))
     {:accept :json
