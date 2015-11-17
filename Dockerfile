@@ -1,6 +1,6 @@
 FROM clojure
 
-ENV workdir=/usr/src/app PORT=80 SERVICE_HOST=192.168.59.103
+ENV workdir=/usr/src/app PORT=80 SERVICE_HOST=backend
 
 RUN mkdir -p ${workdir}
 
