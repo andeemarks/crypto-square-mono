@@ -1,6 +1,6 @@
 FROM clojure
 
-ENV workdir=/usr/src/app PORT=3008
+ENV workdir=/usr/src/app PORT=80
 
 RUN mkdir -p ${workdir}
 
