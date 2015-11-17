@@ -20,5 +20,7 @@
                    :metric (metric elapsed-time) 
                    :state (state) 
                    :description corr-id}))
+    (catch java.lang.Exception ex
+      (log/warn (str "Error connecting to Riemann using config:" (env :riemann-host))))
     (catch java.io.IOException ex 
-      (log/warn "Cannot find Riemann!"))))
+      (log/warn (str "Cannot find Riemann at: " (env :riemann-host))))))
