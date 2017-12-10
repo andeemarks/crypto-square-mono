@@ -1,0 +1,27 @@
+frontend:
+  build: .
+  ports:
+   - "3000:80"
+  links:
+   - backend
+backend:
+  build: ../crypto-square-be
+  ports:
+   - "4000:80"
+  links:
+   - square-sizer
+   - column-handler
+   - normaliser
+normaliser:
+  build: ../normaliser
+  ports:
+   - "4001:80"
+square-sizer:
+  build: ../square-sizer
+  ports:
+   - "4002:80"
+column-handler:
+  build: ../column-handler
+  ports:
+   - "4003:80"
+
