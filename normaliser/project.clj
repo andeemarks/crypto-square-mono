@@ -3,7 +3,6 @@
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [compojure "1.4.0"]
-                 [riemann-clojure-client "0.4.1"]
                  [org.clojure/tools.logging "0.3.1"]
                  [ring.middleware.logger "0.5.0"]
                  [environ "1.0.0"]

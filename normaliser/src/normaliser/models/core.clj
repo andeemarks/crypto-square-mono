@@ -1,6 +1,5 @@
 (ns normaliser.models.core
 	(:require 
-  	[normaliser.services.riemann :as riemann]
   	[metrics.timers :as timer]
 		[clojure.string :as clj-str]))
 
@@ -20,5 +19,4 @@
   (let [timer (timer/start processing-time)
         result (normalise-text text)
         elapsed-time (timer/stop timer)]
-      (riemann/send-event corr-id elapsed-time)
       result))

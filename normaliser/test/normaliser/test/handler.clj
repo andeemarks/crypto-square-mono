@@ -1,12 +1,9 @@
 (ns normaliser.test.handler
   (:use midje.sweet
-    normaliser.services.riemann
     ring.mock.request
     normaliser.handler
     cheshire.core
     ring.util.codec))
-
-(against-background [(send-event anything anything) => ..riemann..]
 
 (facts "about GET"
   (fact "gracefully handles no input"
@@ -34,4 +31,4 @@
       (:status response) => 200
       (get (parse-string (:body response)) "normalised-text") => "abcd"))
 
-))
+)
