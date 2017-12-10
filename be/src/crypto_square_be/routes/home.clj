@@ -2,9 +2,7 @@
   (:require 
   	[compojure.core :refer :all]
     [clojure.tools.logging :as log]
-    [prometheus.core :as prometheus]
     [crypto-square-be.services.normaliser :as normaliser]
-    [crypto-square-be.services.riemann :as riemann]
     [crypto-square-be.services.square-sizer :as square-sizer]
     [crypto-square-be.services.column-handler :as column-handler]
  		[crypto-square-be.views.layout :as layout]
@@ -19,8 +17,7 @@
 
 (defn health-check []
   (let [services-health 
-    {:riemann (riemann/healthcheck) 
-      :column-handler (column-handler/healthcheck) 
+    { :column-handler (column-handler/healthcheck) 
       :square-sizer (square-sizer/healthcheck) 
       :normaliser (normaliser/healthcheck)}]
     {:body 
@@ -32,7 +29,6 @@
   	(home 
   		(get-in request [:body "plaintext"]) 
   		(get-in request [:headers "x-correlation-id"])))
-  (GET "/metrics"  request (prometheus/metrics request))
   (GET  "/health"  request (health-check))
   (GET  "/:plaintext" [plaintext] (home plaintext nil))
   (GET  "/" request (home "" nil))

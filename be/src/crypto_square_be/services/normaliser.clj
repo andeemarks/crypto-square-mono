@@ -24,14 +24,13 @@
   (let [health (health/check normaliser-available?)]
     {:healthy? (.isHealthy health) :message (.getMessage health)}))
 
-(defn- normalise-request [plaintext corr-id]
+(defn- normalise-request [plaintext]
   (log/info (str "Attempting to normalise request via: " (env :normaliser-url)))
   (client/get 
     (str (env :normaliser-url) "/" (url-encode plaintext))
-    {:accept :json
-     :headers {"X-Correlation-Id" corr-id}}))
+    {:accept :json}))
  
-(defn normalise-plaintext [text corr-id]
-  (let [response (normalise-request text corr-id)
+(defn normalise-plaintext [text]
+  (let [response (normalise-request text)
         json-body (json/parse-string (:body response))]
     (get json-body "normalised-text")))

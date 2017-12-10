@@ -19,14 +19,13 @@
   (let [health (health/check column-handler-available?)]
     {:healthy? (.isHealthy health) :message (.getMessage health)}))
 
-(defn- column-handler-request [normalised-text segment-size corr-id]
+(defn- column-handler-request [normalised-text segment-size]
   (client/get 
     (str (env :column-handler-url) "/" normalised-text "/" segment-size)
-    {:accept :json
-     :headers {"X-Correlation-Id" corr-id}}))
+    {:accept :json}))
  
-(defn split-into-columns [normalised-text segment-size corr-id]
-  (let [response (column-handler-request normalised-text segment-size corr-id)
+(defn split-into-columns [normalised-text segment-size]
+  (let [response (column-handler-request normalised-text segment-size)
         json-body (json/parse-string (:body response))]
     (get json-body "column-text")))
 

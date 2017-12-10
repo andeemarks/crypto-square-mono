@@ -19,13 +19,12 @@
   (let [health (health/check square-sizer-available?)]
     {:healthy? (.isHealthy health) :message (.getMessage health)}))
 
-(defn- square-size-request [plaintext corr-id]
+(defn- square-size-request [plaintext]
   (client/get 
     (str (env :square-sizer-url) "/" plaintext)
-    {:accept :json
-     :headers {"X-Correlation-Id" corr-id}}))
+    {:accept :json}))
  
 (defn square-size [text corr-id]
-  (let [response (square-size-request text corr-id)
+  (let [response (square-size-request text)
         json-body (json/parse-string (:body response))]
     (get json-body "size")))
