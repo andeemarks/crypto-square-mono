@@ -6,13 +6,11 @@
             [ring.middleware.json :refer [wrap-json-response]]
             [hiccup.middleware :refer [wrap-base-url]]
             [compojure.handler :as handler]
-            [prometheus.core :as prometheus]
             [compojure.route :as route]
             [crypto-square.routes.home :refer [home-routes]]))
 
 (defn init []
-  (println "crypto-square is starting")
-  (prometheus/init! "crypto_square"))
+  (println "crypto-square is starting"))
 
 (defn destroy []
   (println "crypto-square is shutting down"))
@@ -27,5 +25,4 @@
       (wrap-json-response)
       (wrap-with-logger)
       (wrap-base-url)
-      (prometheus/instrument-handler)
       ))
