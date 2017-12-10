@@ -5,13 +5,11 @@
             [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
             [ring.middleware.logger :refer [wrap-with-logger]]
             [compojure.handler :as handler]
-            [prometheus.core :as prometheus]
             [compojure.route :as route]
             [square-sizer.routes.home :refer [home-routes]]))
 
 (defn init []
-  (println "square-sizer is starting")
-  (prometheus/init! "square_sizer"))
+  (println "square-sizer is starting"))
 
 (defn destroy []
   (println "square-sizer is shutting down"))
@@ -25,5 +23,4 @@
       (handler/site)
       (wrap-json-body)
       (wrap-with-logger)
-      (prometheus/instrument-handler)
       (wrap-json-response)))

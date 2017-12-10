@@ -1,6 +1,5 @@
 (ns square-sizer.models.core
   (:require 
-    [square-sizer.services.riemann :as riemann]
     [metrics.timers :as timer]))
 
 (timer/deftimer processing-time)
@@ -12,5 +11,4 @@
   (let [timer (timer/start processing-time)
         result (calculate-square-size text)
         elapsed-time (timer/stop timer)]
-      (riemann/send-event corr-id elapsed-time)
       result))
