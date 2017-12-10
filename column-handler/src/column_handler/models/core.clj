@@ -1,6 +1,5 @@
 (ns column-handler.models.core
   (:require [clojure.string :as clj-str]
-            [column-handler.services.riemann :as riemann]
             [metrics.timers :as timer]
             [cheshire.core :as json]))
 
@@ -27,7 +26,6 @@
       (let [timer (timer/start processing-time)
             result (segments-in-columns normalized-text (read-string segment-size))
             elapsed-time (timer/stop timer)]
-        (riemann/send-event elapsed-time corr-id)
         result)
     :else
       (throw (IllegalArgumentException. (str "The segment-size value '" segment-size "' is not a number")))))

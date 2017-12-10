@@ -4,7 +4,6 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [compojure "1.4.0"]
                  [ring/ring-json "0.3.1"]
-                 [riemann-clojure-client "0.4.1"]
                  [metrics-clojure "2.5.1"]
                  [metrics-clojure-health "2.5.1"]
                  [environ "1.0.0"]
