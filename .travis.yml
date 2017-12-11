@@ -1,0 +1,6 @@
+language: clojure
+script:
+- cd be && lein midje
+- cd square-sizer && lein midje
+- cd column-handler && lein midje
+- cd normaliser && lein midje
