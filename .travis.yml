@@ -1,11 +1,11 @@
 language: clojure
 script:
-- cd be && lein midje
-- cd square-sizer && lein midje
-- cd column-handler && lein midje
-- cd normaliser && lein midje
+- cd ${TRAVIS_BUILD_DIR}/be && lein midje
+- cd ${TRAVIS_BUILD_DIR}/square-sizer && lein midje
+- cd ${TRAVIS_BUILD_DIR}/column-handler && lein midje
+- cd ${TRAVIS_BUILD_DIR}/normaliser && lein midje
 install: 
-- cd be && lein deps
-- cd square-sizer && lein deps
-- cd column-handler && lein deps
-- cd normaliser && lein deps
+- cd ${TRAVIS_BUILD_DIR}/be && lein deps
+- cd ${TRAVIS_BUILD_DIR}/square-sizer && lein deps
+- cd ${TRAVIS_BUILD_DIR}/column-handler && lein deps
+- cd ${TRAVIS_BUILD_DIR}/normaliser && lein deps
