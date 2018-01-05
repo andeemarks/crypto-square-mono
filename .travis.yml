@@ -4,3 +4,8 @@ script:
 - cd square-sizer && lein midje
 - cd column-handler && lein midje
 - cd normaliser && lein midje
+install: 
+- cd be && lein deps
+- cd square-sizer && lein deps
+- cd column-handler && lein deps
+- cd normaliser && lein deps
