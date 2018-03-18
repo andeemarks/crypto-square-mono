@@ -20,7 +20,7 @@ To make deployment and startup of the application easier, the repo for the front
 
 To start all the services for the application, run:
 
-    ./docker-compose up
+    docker-compose up
 
 Note: the first time you run this command, it make take 20 minutes to download all the dependencies to run the services.  This is a bootstrapping tax and subsequent invocations should be very quick.
 
