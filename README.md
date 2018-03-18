@@ -1,6 +1,6 @@
 # crypto-square
 
-[![Build Status](https://travis-ci.org/andeemarks/crypto-square.svg?branch=master)](https://travis-ci.org/andeemarks/crypto-square)
+[![Build Status](https://travis-ci.org/andeemarks/crypto-square-mono.svg?branch=master)](https://travis-ci.org/andeemarks/crypto-square-mono)
 
 A minimal Compojure web-app built for a presentation at [Yow West 2015][1], and providing a basic UI for the Crypto Square solution found [here][3].
 
