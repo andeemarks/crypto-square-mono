@@ -1,3 +1,5 @@
+jdk:
+  - openjdk9
 language: clojure
 script:
 - cd ${TRAVIS_BUILD_DIR}/be && lein midje
