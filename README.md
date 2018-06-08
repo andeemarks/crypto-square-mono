@@ -9,10 +9,10 @@ A minimal Compojure web-app built for a presentation at [Yow West 2015][1], and 
 ## Prerequisites
 
 Currently building on: 
-- [Leiningen][2] 2.5.1
-- [Docker][6] 1.9.0
-- [Docker Machine][7] 0.6.0
-- [Docker Compose][8] 1.5.1
+- [Leiningen][2] 2.7.1
+- [Docker][6] 1.13.1
+- [Docker Machine][7] 0.14.0 (install instructions [here][9])
+- [Docker Compose][8] 1.21.2 (install instructions [here][10])
 
 ## Running
 
@@ -48,3 +48,5 @@ Copyright © 2015
 [6]: https://www.docker.com/
 [7]: https://www.docker.com/products/docker-machine
 [8]: https://www.docker.com/products/docker-compose
+[9]: https://docs.docker.com/machine/install-machine/#install-machine-directly
+[10]: https://docs.docker.com/compose/install/
