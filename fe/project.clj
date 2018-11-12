@@ -4,7 +4,7 @@
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [compojure "1.6.1"]
                  [hiccup "1.0.5"]
-                 [clj-http "3.9.0"]
+                 [clj-http "3.9.1"]
                  [onelog "0.5.0" :exclusions [io.aviso/pretty]]
                  [ring.middleware.logger "0.5.0" :exclusions [log4j]]
                  [org.clojure/tools.logging "0.4.1"]
@@ -29,7 +29,7 @@
    :dev
    {:dependencies [
                    [clj-webdriver "0.7.2" :exclusions [org.seleniumhq.selenium/selenium-server]]
-                   [org.seleniumhq.selenium/selenium-server "3.12.0" :exclusions 
+                   [org.seleniumhq.selenium/selenium-server "3.141.5" :exclusions 
                     [[org.eclipse.jetty/jetty-client]
                      [org.eclipse.jetty/jetty-xml]
                      [org.eclipse.jetty.websocket/websocket-api]
@@ -37,7 +37,7 @@
                      [org.eclipse.jetty.websocket/websocket-common]
                      [org.apache.commons/commons-text]]]
                    [ring-mock "0.1.5"] 
-                   [midje "1.9.1"]
-                   [ring/ring-jetty-adapter "1.6.3"]
-                   [ring/ring-devel "1.6.3"]]
+                   [midje "1.9.4"]
+                   [ring/ring-jetty-adapter "1.7.1"]
+                   [ring/ring-devel "1.7.1"]]
     :plugins [[lein-midje "3.1.3"]]}})

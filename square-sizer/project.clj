@@ -3,7 +3,7 @@
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [compojure "1.6.1"]
-                 [cheshire "5.8.0"]
+                 [cheshire "5.8.1"]
                  [ring.middleware.logger "0.5.0"]
                  [onelog "0.5.0" :exclusions [io.aviso/pretty]]
                  [org.clojure/tools.logging "0.4.1"]
@@ -23,7 +23,7 @@
    {:ring
     {:open-browser? false, :stacktraces? false, :auto-reload? false}}
    :dev
-   {:dependencies [ [midje "1.9.1"]
+   {:dependencies [ [midje "1.9.4"]
                     [ring-mock "0.1.5"] 
-                    [ring/ring-devel "1.6.3"]]
+                    [ring/ring-devel "1.7.1"]]
     :plugins [[lein-midje "3.1.3"]]}})
