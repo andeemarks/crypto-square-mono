@@ -13,4 +13,4 @@
 (fact "Happy GETs return 200"
   (:status (encrypt "abcd")) => 200
   (provided 
-    (ciphertext "abcd" anything) => "acdb"))
+    (ciphertext "abcd") => "acdb"))

@@ -10,7 +10,7 @@
 
 (defn home 
 	[plaintext corr-id]
-  (layout/json-response {:ciphertext (model/ciphertext plaintext corr-id)} corr-id))
+  (layout/json-response {:ciphertext (model/ciphertext plaintext)} corr-id))
 
 (defn- any-services-unhealthy? [services-health]
   (not (some #(false? (:healthy? %1)) (vals services-health))))

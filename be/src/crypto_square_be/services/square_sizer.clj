@@ -24,7 +24,7 @@
     (str (env :square-sizer-url) "/" plaintext)
     {:accept :json}))
  
-(defn square-size [text corr-id]
+(defn square-size [text]
   (let [response (square-size-request text)
         json-body (json/parse-string (:body response))]
     (get json-body "size")))
