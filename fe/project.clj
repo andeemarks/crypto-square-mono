@@ -13,6 +13,7 @@
                  [metrics-clojure-ring "2.10.0" :exclusions [org.slf4j/slf4j-api]]
                  [environ "1.1.0"]
                  [ring/ring-json "0.4.0"]
+                 [org.eclipse.jetty/jetty-http "9.4.12.v20180830"]
                  [ring-server "0.5.0"]]
   :plugins [[lein-ring "0.9.6"]]
   :ring {:handler crypto-square.handler/app
