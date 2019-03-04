@@ -1,7 +1,7 @@
 (defproject square-sizer "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
-  :dependencies [[org.clojure/clojure "1.9.0"]
+  :dependencies [[org.clojure/clojure "1.10.0"]
                  [compojure "1.6.1"]
                  [cheshire "5.8.1"]
                  [ring.middleware.logger "0.5.0"]
@@ -23,7 +23,7 @@
    {:ring
     {:open-browser? false, :stacktraces? false, :auto-reload? false}}
    :dev
-   {:dependencies [ [midje "1.9.4"]
+   {:dependencies [ [midje "1.9.6"]
                     [ring-mock "0.1.5"] 
                     [ring/ring-devel "1.7.1"]]
     :plugins [[lein-midje "3.1.3"]]}})
