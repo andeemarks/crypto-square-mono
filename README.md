@@ -4,14 +4,14 @@
 
 A minimal Compojure web-app built for a presentation at [Yow West 2015][1], and providing a basic UI for the Crypto Square solution found [here][3].
 
-![](https://github.com/andeemarks/column-handler/blob/master/resources/public/img/services.png)
+![](https://github.com/andeemarks/blob/master/resources/public/img/services.png)
 
 ## Prerequisites
 
 Currently building on: 
 - [Leiningen][2] 2.8.1
 - [Docker][6] 1.38
-- [Open JDK][11] 9 
+- [Open JDK][11] 10.0.2
 - [Docker Machine][7] 0.14.0 (install instructions [here][9])
 - [Docker Compose][8] 1.17.2 (install instructions [here][10])
 
