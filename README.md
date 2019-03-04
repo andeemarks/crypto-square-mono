@@ -4,7 +4,7 @@
 
 A minimal Compojure web-app built for a presentation at [Yow West 2015][1], and providing a basic UI for the Crypto Square solution found [here][3].
 
-![](https://github.com/andeemarks/blob/master/resources/public/img/services.png)
+![](https://github.com/andeemarks/crypto-square-mono/blob/master/resources/public/img/services.png)
 
 ## Prerequisites
 
@@ -39,7 +39,7 @@ Note: this assumes you have the [Chrome Driver][5] installed at ~/bin/chromedriv
 
 ## License
 
-Copyright © 2015
+Copyright © 2015-2019
 
 [1]: https://a.confui.com/-LsHgG00I
 [2]: https://github.com/technomancy/leiningen
