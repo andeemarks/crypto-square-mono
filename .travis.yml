@@ -3,7 +3,7 @@ jdk:
 language: clojure
 script:
 - cd ${TRAVIS_BUILD_DIR}/be && lein midje
-- cd ${TRAVIS_BUILD_DIR}/square-sizer && lein midje
+- cd ${TRAVIS_BUILD_DIR}/square-sizer && lein test
 - cd ${TRAVIS_BUILD_DIR}/column-handler && lein midje
 - cd ${TRAVIS_BUILD_DIR}/normaliser && lein midje
 install: 
