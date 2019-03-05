@@ -1,9 +1,8 @@
 (ns square-sizer.handler
   (:require [compojure.api.sweet :refer :all]
-            [ring.util.http-response :refer :all]
-            [compojure.handler :as handler]
-            [compojure.route :as route]
-            [square-sizer.routes.home :refer [home home-routes]]))
+            [square-sizer.views.layout :refer [json-response]]
+            [square-sizer.models.core :refer [square-size]]
+            [ring.util.http-response :refer :all]))
 
 (defn init []
   (println "square-sizer is starting"))
@@ -11,9 +10,8 @@
 (defn destroy []
   (println "square-sizer is shutting down"))
 
-(defroutes app-routes
-  (route/resources "/")
-  (route/not-found "Not Found"))
+(defn home [plaintext corr-id]
+  (json-response {:size (square-size plaintext corr-id)}))
 
 (def app
   (api
@@ -29,5 +27,5 @@
      :summary "Calculate the square size of the plaintext argument"
      (home plaintext (get-in request [:headers "x-correlation-id"])))
    (GET  "/"           []
-    :summary "Dummy endpoint"
+     :summary "Dummy endpoint"
      (home "" ""))))
