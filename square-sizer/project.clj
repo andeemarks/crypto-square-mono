@@ -3,6 +3,7 @@
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [compojure "1.6.1"]
+                 [metosin/compojure-api "1.1.11"]
                  [cheshire "5.8.1"]
                  [ring.middleware.logger "0.5.0"]
                  [onelog "0.5.0" :exclusions [io.aviso/pretty]]
@@ -16,14 +17,12 @@
   :ring {:handler square-sizer.handler/app
          :init square-sizer.handler/init
          :destroy square-sizer.handler/destroy}
-  :min-lein-version "2.0.0"         
+  :min-lein-version "2.0.0"
   :profiles
   {:uberjar {:aot :all}
    :production
    {:ring
     {:open-browser? false, :stacktraces? false, :auto-reload? false}}
    :dev
-   {:dependencies [ [midje "1.9.6"]
-                    [ring-mock "0.1.5"] 
-                    [ring/ring-devel "1.7.1"]]
-    :plugins [[lein-midje "3.1.3"]]}})
+   {:dependencies [[ring-mock "0.1.5"]
+                   [ring/ring-devel "1.7.1"]]}})

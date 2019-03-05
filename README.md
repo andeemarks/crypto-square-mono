@@ -10,7 +10,7 @@ A minimal Compojure web-app built for a presentation at [Yow West 2015][1], and 
 
 Currently building on: 
 - [Leiningen][2] 2.8.1
-- [Docker][6] 1.38
+- [Docker][6] 18.06
 - [Open JDK][11] 10.0.2
 - [Docker Machine][7] 0.14.0 (install instructions [here][9])
 - [Docker Compose][8] 1.17.2 (install instructions [here][10])

@@ -1,12 +1,9 @@
 (ns square-sizer.handler
-  (:require [compojure.core :refer [defroutes routes]]
-            [ring.middleware.resource :refer [wrap-resource]]
-            [ring.middleware.file-info :refer [wrap-file-info]]
-            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
-            [ring.middleware.logger :refer [wrap-with-logger]]
+  (:require [compojure.api.sweet :refer :all]
+            [ring.util.http-response :refer :all]
             [compojure.handler :as handler]
             [compojure.route :as route]
-            [square-sizer.routes.home :refer [home-routes]]))
+            [square-sizer.routes.home :refer [home home-routes]]))
 
 (defn init []
   (println "square-sizer is starting"))
@@ -19,8 +16,18 @@
   (route/not-found "Not Found"))
 
 (def app
-  (-> (routes home-routes app-routes)
-      (handler/site)
-      (wrap-json-body)
-      (wrap-with-logger)
-      (wrap-json-response)))
+  (api
+   {:swagger
+    {:ui "/api-docs"
+     :spec "/swagger.json"
+     :data {:info {:title "Square Sizer API"
+                   :description "Web API provided by Square Sizer service"}
+            :tags [{:name "api", :description "square-sizer"}]
+            :consumes ["application/json"]
+            :produces ["application/json"]}}}
+   (GET  "/:plaintext" [plaintext :as request]
+     :summary "Calculate the square size of the plaintext argument"
+     (home plaintext (get-in request [:headers "x-correlation-id"])))
+   (GET  "/"           []
+    :summary "Dummy endpoint"
+     (home "" ""))))
