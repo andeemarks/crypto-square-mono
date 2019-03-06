@@ -1,12 +1,8 @@
 (ns column-handler.handler
-  (:require [compojure.core :refer [defroutes routes]]
-            [ring.middleware.resource :refer [wrap-resource]]
-            [ring.middleware.file-info :refer [wrap-file-info]]
-            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
-            [ring.middleware.logger :refer [wrap-with-logger]]
-            [compojure.handler :as handler]
-            [compojure.route :as route]
-            [column-handler.routes.home :refer [home-routes]]))
+  (:require [compojure.api.sweet :refer :all]
+            [compojure.route :refer :all]
+            [column-handler.models.core :refer [columnise]]
+            [column-handler.views.layout :refer [json-response]]))
 
 (defn init []
   (println "column-handler is starting"))
@@ -14,13 +10,29 @@
 (defn destroy []
   (println "column-handler is shutting down"))
 
-(defroutes app-routes
-  (route/resources "/")
-  (route/not-found "Not Found"))
+(defn home [plaintext segment-size corr-id]
+  (try
+    (json-response {:column-text (columnise plaintext segment-size corr-id)})
+    (catch IllegalArgumentException e
+      {:status  400
+       :body {:error (.getMessage e)}
+       :headers {"Content-Type" "application/json; charset=utf-8"}})))
 
 (def app
-  (-> (routes home-routes app-routes)
-      (handler/site)
-      (wrap-with-logger)
-      (wrap-json-body)
-      (wrap-json-response)))
+  (api
+  ;  (undocumented
+  ;   (compojure.route/not-found (not-found {:not "found"})))
+  {:swagger
+   {:ui "/api-docs"
+    :spec "/swagger.json"
+    :data {:info {:title "Column Handler API"
+                  :description "Web API provided by Column Handler service"}
+           :tags [{:name "api", :description "column-handler"}]
+           :consumes ["application/json"]
+           :produces ["application/json"]}}}
+  (GET  "/:plaintext/:segment-size" [plaintext segment-size :as request]
+    :summary "Splits the plaintext into groups of segment-size"
+    (home
+     plaintext
+     segment-size
+     (get-in request [:headers "x-correlation-id"])))))
