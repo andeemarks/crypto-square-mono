@@ -20,19 +20,19 @@
 
 (def app
   (api
-  ;  (undocumented
-  ;   (compojure.route/not-found (not-found {:not "found"})))
-  {:swagger
-   {:ui "/api-docs"
-    :spec "/swagger.json"
-    :data {:info {:title "Column Handler API"
-                  :description "Web API provided by Column Handler service"}
-           :tags [{:name "api", :description "column-handler"}]
-           :consumes ["application/json"]
-           :produces ["application/json"]}}}
-  (GET  "/:plaintext/:segment-size" [plaintext segment-size :as request]
-    :summary "Splits the plaintext into groups of segment-size"
-    (home
-     plaintext
-     segment-size
-     (get-in request [:headers "x-correlation-id"])))))
+   {:swagger
+    {:ui "/api-docs"
+     :spec "/swagger.json"
+     :data {:info {:title "Column Handler API"
+                   :description "Web API provided by Column Handler service"}
+            :tags [{:name "api", :description "column-handler"}]
+            :consumes ["application/json"]
+            :produces ["application/json"]}}}
+   (GET  "/:plaintext/:segment-size" [plaintext segment-size :as request]
+     :summary "Splits the plaintext into groups of segment-size"
+     (home
+      plaintext
+      segment-size
+      (get-in request [:headers "x-correlation-id"])))
+     (undocumented
+      (compojure.route/not-found (not-found {:not "found"})))))

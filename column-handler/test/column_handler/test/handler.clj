@@ -9,23 +9,21 @@
   (let [body (slurp (:body (app (request :get input))))]
     (get (parse-string body) "column-text")))
 
+(defn- response-status-for [input]
+  (:status (app (request :get input))))
+
 (deftest test-routes
   (testing "happy responses are 200s"
-    (let [response (app (request :get "/abcd/2"))]
-      (is (= 200 (:status response)))))
+    (is (= 200 (response-status-for "/abcd/2"))))
 
-  ; (testing "two arguments are needed"
-  ;   (let [response (app (request :get "/abcd/"))]
-  ;     (is (= 404 (:status response)))))
+  (testing "two arguments are needed"
+    (is (= 404 (response-status-for "/abcd/"))))
 
   (testing "second arguments must be numeric"
-    (let [response (app (request :get "/abcd/a"))]
-      (is (= 400 (:status response)))))
+    (is (= 400 (response-status-for "/abcd/a"))))
 
   (testing "responses are found in column-text inside response body"
-    (let [response (app (request :get "/abcd/2"))
-          body (parse-string (slurp (:body response)))]
-      (is (not (nil? (get body "column-text"))))))
+    (is (not (nil? (response-body-for "/abcd/2")))))
 
   (testing "second argument denotes number of rows"
     (is (= ["ad" "be" "cf"] (response-body-for "/abcdef/3"))))
