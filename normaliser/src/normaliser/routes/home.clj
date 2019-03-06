@@ -1,6 +1,6 @@
 (ns normaliser.routes.home
   (:require [compojure.core :refer :all]
-  			[normaliser.models.core :as model]
+            [normaliser.models.core :as model]
             [normaliser.views.layout :as layout]))
 
 (defn home [plaintext corr-id]

@@ -1,34 +1,31 @@
 (ns normaliser.test.handler
-  (:use midje.sweet
-    ring.mock.request
-    normaliser.handler
-    cheshire.core
-    ring.util.codec))
+  (:require
+   [ring.mock.request :as mock]
+   [clojure.test :refer :all]
+   [cheshire.core :as json]
+   [normaliser.handler :as handler]))
 
-(facts "about GET"
-  (fact "gracefully handles no input"
-    (let [response (app (request :get "/"))]
-      (:status response) => 200
-      (get (parse-string (:body response)) "normalised-text") => ""))
+(defn- response-for [input]
+  (let [response (handler/app (mock/request :get input))]
+    {:status (:status response) :body (get (json/parse-string (slurp (:body response))) "normalised-text")}))
 
-  (fact "already normal text is unchanged"
-    (let [response (app (request :get "/abcd1234"))]
-      (:status response) => 200
-      (get (parse-string (:body response)) "normalised-text") => "abcd1234"))
+(deftest test-routes
+  (testing "gracefully handles no input"
+    (let [response (response-for "/")]
+      (is (= 200 (:status response)))
+      (is (= "" (:body response)))))
 
-  (fact "everything is down cased"
-    (let [response (app (request :get "/aBcDe"))]
-      (:status response) => 200
-      (get (parse-string (:body response)) "normalised-text") => "abcde"))
+  (testing "already normal text is unchanged"
+    (let [response (response-for "/abcd1234")]
+      (is (= 200 (:status response)))
+      (is (= "abcd1234" (:body response)))))
 
-  (fact "punctuation is removed"
-    (let [response (app (request :get (str "/" (url-encode "a{}bcd']12#$%3&4"))))]
-      (:status response) => 200
-      (get (parse-string (:body response)) "normalised-text") => "abcd1234"))
+  (testing "everything is down cased"
+    (let [response (response-for "/aBcDe")]
+      (is (= 200 (:status response)))
+      (is (= "abcde" (:body response)))))
 
-  (fact "spaces are removed"
-    (let [response (app (request :get "/a+b+c+d"))]
-      (:status response) => 200
-      (get (parse-string (:body response)) "normalised-text") => "abcd"))
-
-)
+  (testing "spaces are removed"
+    (let [response (response-for "/a+b+c+d")]
+      (is (= 200 (:status response)))
+      (is (= "abcd" (:body response))))))

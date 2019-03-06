@@ -1,12 +1,8 @@
 (ns normaliser.handler
-  (:require [compojure.core :refer [defroutes routes]]
-            [ring.middleware.resource :refer [wrap-resource]]
-            [ring.middleware.file-info :refer [wrap-file-info]]
-            [ring.middleware.json :refer [wrap-json-body wrap-json-response]]
-            [ring.middleware.logger :refer [wrap-with-logger]]
-            [compojure.handler :as handler]
-            [compojure.route :as route]
-            [normaliser.routes.home :refer [home-routes]]))
+  (:require [compojure.api.sweet :refer :all]
+            [compojure.route :refer :all]
+            [normaliser.models.core :refer [normalise]]
+            [normaliser.views.layout :refer [json-response]]))
 
 (defn init []
   (println "normaliser is starting"))
@@ -14,13 +10,24 @@
 (defn destroy []
   (println "normaliser is shutting down"))
 
-(defroutes app-routes
-  (route/resources "/")
-  (route/not-found "Not Found"))
+(defn home [plaintext corr-id]
+  (json-response {:normalised-text (normalise plaintext corr-id)}))
 
 (def app
-  (-> (routes home-routes app-routes)
-      (handler/site)
-      (wrap-json-body)
-      (wrap-with-logger)
-      (wrap-json-response)))
+  (api
+   {:swagger
+    {:ui "/api-docs"
+     :spec "/swagger.json"
+     :data {:info {:title "Normaliser API"
+                   :description "Web API provided by Normaliser service"}
+            :tags [{:name "api", :description "normaliser"}]
+            :consumes ["application/json"]
+            :produces ["application/json"]}}}
+   (GET  "/" []
+     :summary "Dummy endpoint"
+     (home "" ""))
+   (GET  "/:plaintext" [plaintext :as request]
+     :summary "Removes any non alphanumeric characters from plaintext"
+     (home plaintext (get-in request [:headers "x-correlation-id"])))
+   (undocumented
+    (compojure.route/not-found (not-found {:not "found"})))))
