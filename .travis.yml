@@ -5,7 +5,7 @@ script:
 - cd ${TRAVIS_BUILD_DIR}/be && lein midje
 - cd ${TRAVIS_BUILD_DIR}/square-sizer && lein test
 - cd ${TRAVIS_BUILD_DIR}/column-handler && lein test
-- cd ${TRAVIS_BUILD_DIR}/normaliser && lein midje
+- cd ${TRAVIS_BUILD_DIR}/normaliser && lein test
 install: 
 - cd ${TRAVIS_BUILD_DIR}/be && lein deps
 - cd ${TRAVIS_BUILD_DIR}/square-sizer && lein deps
