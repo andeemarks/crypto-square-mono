@@ -1,40 +1,38 @@
 (ns column-handler.test.handler
-  (:use midje.sweet
-        ring.mock.request
-        cheshire.core        
-        column-handler.handler))
+  (:require
+   [ring.mock.request :refer :all]
+   [clojure.test :refer :all]
+   [cheshire.core :refer :all]
+   [column-handler.handler :refer :all]))
 
-(facts "About main GET route"
-  (fact "happy responses are 200s"
+(defn- response-body-for [input]
+  (let [body (:body (app (request :get input)))]
+    (get (parse-string body) "column-text")))
+
+(deftest test-routes
+  (testing "happy responses are 200s"
     (let [response (app (request :get "/abcd/2"))]
-      (:status response) => 200))
+      (is (= 200 (:status response)))))
 
-  (fact "two arguments are needed"
+  (testing "two arguments are needed"
     (let [response (app (request :get "/abcd/"))]
-      (:status response) => 404))
+      (is (= 404 (:status response)))))
 
-  (fact "second arguments must be numeric"
+  (testing "second arguments must be numeric"
     (let [response (app (request :get "/abcd/a"))]
-      (:status response) => 400))
+      (is (= 400 (:status response)))))
 
-  (fact "responses are found in column-text inside response body"
+  (testing "responses are found in column-text inside response body"
     (let [response (app (request :get "/abcd/2"))
           body (parse-string (:body response))]
-      (nil? (get body "column-text")) => false))
+      (is (not (nil? (get body "column-text"))))))
 
-  (facts "About the responses from GET"
-    (defn- response-for [input]
-      (get (parse-string 
-        (:body 
-          (app (request :get input)))) "column-text"))
+  (testing "second argument denotes number of rows"
+    (let [body (response-body-for "/abcdef/3")]
+      (is (= ["ad" "be" "cf"] body))))
 
-    (fact "second argument denotes number of rows"
-      (response-for "/abcdef/3") => ["ad" "be" "cf"]) 
+  (testing "one row does not change input"
+    (is (= ["abcdef"] (response-body-for "/abcdef/1"))))
 
-    (fact "one row does not change input"
-      (response-for "/abcdef/1") => ["abcdef"])
-
-    (fact "rows will be added if not enough input"
-      (response-for "/a/2") => ["a" ""])
-  )
-)
+  (testing "rows will be added if not enough input"
+    (is (= ["a" ""] (response-body-for "/a/2")))))

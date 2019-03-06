@@ -21,7 +21,5 @@
    {:ring
     {:open-browser? false, :stacktraces? false, :auto-reload? false}}
    :dev
-    {:dependencies [ [midje "1.9.6"]
-                     [ring-mock "0.1.5"] 
-                     [ring/ring-devel "1.7.1"]]
-     :plugins [[lein-midje "3.1.3"]]}})
+    {:dependencies [ [ring-mock "0.1.5"] 
+                     [ring/ring-devel "1.7.1"]] }})
