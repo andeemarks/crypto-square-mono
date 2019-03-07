@@ -3,6 +3,7 @@
   :url "http://example.com/FIXME"
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [compojure "1.6.1"]
+                 [metosin/compojure-api "1.1.11"]
                  [cheshire "5.8.1"]
                  [clj-http "3.9.1"]
                  [org.clojure/tools.logging "0.4.1"]
