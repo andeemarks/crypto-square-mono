@@ -2,7 +2,7 @@ jdk:
   - oraclejdk9
 language: clojure
 script:
-- cd ${TRAVIS_BUILD_DIR}/be && lein midje
+- cd ${TRAVIS_BUILD_DIR}/be && lein test
 - cd ${TRAVIS_BUILD_DIR}/square-sizer && lein test
 - cd ${TRAVIS_BUILD_DIR}/column-handler && lein test
 - cd ${TRAVIS_BUILD_DIR}/normaliser && lein test
