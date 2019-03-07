@@ -1,16 +1,18 @@
 (ns crypto-square-be.test.handler
-  (:use midje.sweet
-        ring.mock.request
-        crypto-square-be.models.core
-        cheshire.core
-        crypto-square-be.handler))
+  (:require [clojure.test :refer :all]
+            [ring.mock.request :as mock]
+            [crypto-square-be.models.core :as model]
+            [cheshire.core :as json]
+            [clj-fakes.core :as f]
+            [clj-fakes.context :as fc]
+            [crypto-square-be.handler :as handler]))
 
 (defn- encrypt [plaintext]
-  (app 
-    (request :get 
-      (str "/" plaintext))))
+  (handler/app
+   (mock/request :get
+                 (str "/" plaintext))))
 
-(fact "Happy GETs return 200"
-  (:status (encrypt "abcd")) => 200
-  (provided 
-    (ciphertext "abcd") => "acdb"))
+(deftest handler
+  (testing "Happy GETs return 200"
+    (with-redefs-fn {#'model/ciphertext (fn [text] "acdb")}
+      #(is (= 200 (:status (encrypt "abcd")))))))

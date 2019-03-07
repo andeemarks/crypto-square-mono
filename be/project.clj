@@ -23,7 +23,6 @@
    {:ring
     {:open-browser? false, :stacktraces? false, :auto-reload? false}}
    :dev
-   {:dependencies [ [midje "1.9.6"]
-                    [ring-mock "0.1.5"] 
-                    [ring/ring-devel "1.7.1"]]
-    :plugins [[lein-midje "3.0.0"]]}})
+   {:dependencies [[ring-mock "0.1.5"]
+                   [clj-fakes "0.11.0"]
+                   [ring/ring-devel "1.7.1"]]}})
