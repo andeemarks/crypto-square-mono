@@ -1,19 +1,19 @@
 (defproject crypto-square "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
-  :dependencies [[org.clojure/clojure "1.9.0"]
+  :dependencies [[org.clojure/clojure "1.10.1"]
                  [compojure "1.6.1"]
                  [hiccup "1.0.5"]
-                 [clj-http "3.9.1"]
+                 [clj-http "3.10.0"]
                  [onelog "0.5.0" :exclusions [io.aviso/pretty]]
                  [ring.middleware.logger "0.5.0" :exclusions [log4j]]
-                 [org.clojure/tools.logging "0.4.1"]
+                 [org.clojure/tools.logging "0.5.0"]
                  [metrics-clojure "2.10.0"  :exclusions [org.slf4j/slf4j-api]]
                  [metrics-clojure-health "2.10.0"  :exclusions [org.slf4j/slf4j-api]]
                  [metrics-clojure-ring "2.10.0" :exclusions [org.slf4j/slf4j-api]]
                  [environ "1.1.0"]
-                 [ring/ring-json "0.4.0"]
-                 [org.eclipse.jetty/jetty-http "9.4.12.v20180830"]
+                 [ring/ring-json "0.5.0"]
+                 [org.eclipse.jetty/jetty-http "9.4.22.v20191022"]
                  [ring-server "0.5.0"]]
   :plugins [[lein-ring "0.9.6"]]
   :ring {:handler crypto-square.handler/app
@@ -30,7 +30,7 @@
    :dev
    {:dependencies [
                    [clj-webdriver "0.7.2" :exclusions [org.seleniumhq.selenium/selenium-server]]
-                   [org.seleniumhq.selenium/selenium-server "3.141.5" :exclusions 
+                   [org.seleniumhq.selenium/selenium-server "3.141.59" :exclusions 
                     [[org.eclipse.jetty/jetty-client]
                      [org.eclipse.jetty/jetty-xml]
                      [org.eclipse.jetty.websocket/websocket-api]
@@ -38,7 +38,7 @@
                      [org.eclipse.jetty.websocket/websocket-common]
                      [org.apache.commons/commons-text]]]
                    [ring-mock "0.1.5"] 
-                   [midje "1.9.4"]
-                   [ring/ring-jetty-adapter "1.7.1"]
-                   [ring/ring-devel "1.7.1"]]
+                   [midje "1.9.9"]
+                   [ring/ring-jetty-adapter "1.8.0"]
+                   [ring/ring-devel "1.8.0"]]
     :plugins [[lein-midje "3.1.3"]]}})
