@@ -28,7 +28,11 @@ To start a web server for the application locally, run:
 
 To run the test suite:
 
-	lein midje
+	lein test
+
+To manually test a local version, try:
+
+	curl http://localhost:4000/abcd
 
 To manually test a hosted version, try:
 
