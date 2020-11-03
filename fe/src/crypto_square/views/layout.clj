@@ -7,11 +7,13 @@
 
 (defn common [& body]
   (html5
-    [:head
-     [:title "Welcome to crypto-square"]
-     (include-css "/css/screen.css")]
-    [:h1 "Crypto Square"] 
-    [:body body]))
+   [:head
+    [:title "Welcome to crypto-square"]
+    [:link {:rel "icon" :href "data:,"}]
+
+    (include-css "/css/screen.css")]
+   [:h1 "Crypto Square"]
+   [:body body]))
 
 (defn- show-form [plaintext ciphertext]
   (common
