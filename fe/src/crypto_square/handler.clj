@@ -24,5 +24,4 @@
       (handler/site)
       (wrap-json-response)
       (wrap-with-logger)
-      (wrap-base-url)
-      ))
+      (wrap-base-url)))
