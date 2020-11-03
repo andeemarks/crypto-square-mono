@@ -22,7 +22,7 @@
   {:uberjar {:aot :all}
    :production
    {:ring
-    {:open-browser? false, :stacktraces? false, :auto-reload? false}}
+    {:open-browser? false, :stacktraces? false, :auto-reload? false}}l
    :dev
    {:dependencies [[ring-mock "0.1.5"]
                    [clj-fakes "0.12.0"]
